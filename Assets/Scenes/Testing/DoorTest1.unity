@@ -340,7 +340,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.624371
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -434,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 985791612808017937, guid: a21ab7a187bdcc044ab001b94b131777, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25955558
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 985791612808017937, guid: a21ab7a187bdcc044ab001b94b131777, type: 3}
       propertyPath: m_LocalPosition.z
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1318959788}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5.624371
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -574,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.46
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.z
@@ -657,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.661909
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.z
@@ -791,7 +791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 985791612808017937, guid: a21ab7a187bdcc044ab001b94b131777, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3032913
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 985791612808017937, guid: a21ab7a187bdcc044ab001b94b131777, type: 3}
       propertyPath: m_LocalPosition.z
@@ -859,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.97555125
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2319497182712741995, guid: a85458300feb005499e61e76cd70a977, type: 3}
       propertyPath: m_LocalPosition.z
