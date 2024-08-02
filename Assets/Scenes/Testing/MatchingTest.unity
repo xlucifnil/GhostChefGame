@@ -249,9 +249,11 @@ MonoBehaviour:
   - {fileID: 4091856856137785040, guid: 61dd25cc421f66342b5adaf96b3ecd00, type: 3}
   - {fileID: 7858119881965506228, guid: 0c8d02a4a9bf7764e81fd2d28bd1ea70, type: 3}
   - {fileID: 1804250743304819630, guid: a0d70305e3d6533478b2055502b57649, type: 3}
-  rows: 10
-  cols: 10
+  rows: 7
+  cols: 7
   gridSpacing: 1.25
+  firstClicked: {fileID: 0}
+  secondClicked: {fileID: 0}
 --- !u!4 &1595701459
 Transform:
   m_ObjectHideFlags: 0
