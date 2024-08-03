@@ -32,7 +32,7 @@ public class MatchingManagement : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (firstClicked == null)
+            if (firstClicked == null && hit != false && hit.collider.gameObject.tag == "Tile")
             {
                 firstClicked = hit.collider.gameObject;
             }
@@ -40,7 +40,7 @@ public class MatchingManagement : MonoBehaviour
             {
                 firstClicked = null;
             }
-            else
+            else if(hit != false && hit.collider.gameObject.tag == "Tile")
             {
                 secondClicked = hit.collider.gameObject;
             }
@@ -104,6 +104,10 @@ public class MatchingManagement : MonoBehaviour
                     {
                         if(aMatch.matchedTiles.Count >= 3)
                         {
+                            for (int k = 0; k < aMatch.matchedTiles.Count; k++)
+                            {
+                                board[currentCol, currentRow - 1 - k].GetComponent<Tile>().matched = true;
+                            }
                             matches.Add(aMatch);
                             aMatch.matchedTiles = new List<GameObject>();
                         }
@@ -138,6 +142,10 @@ public class MatchingManagement : MonoBehaviour
                     {
                         if (aMatch.matchedTiles.Count >= 3)
                         {
+                            for (int k = 0; k < aMatch.matchedTiles.Count; k++)
+                            {
+                                board[currentCol - 1 - k, currentRow].GetComponent<Tile>().matched = true;
+                            }
                             matches.Add(aMatch);
                             aMatch.matchedTiles = new List<GameObject>();
                         }
@@ -158,8 +166,55 @@ public class MatchingManagement : MonoBehaviour
                 for (int j = 0; j < matches[i].matchedTiles.Count; j++)
                 {
                     Destroy(matches[i].matchedTiles[j]);
+                    matches[i].matchedTiles[j] = null;
                 }
             }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    if (board[i, j].GetComponent<Tile>().matched == true)
+                    {
+                        board[i, j] = null;
+                    }
+                }
+            }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = rows-1; j >= 0; j--)
+                {
+                    if (board[i, j] != null)
+                    {
+                        int newRow = j;
+                        for (int k = j; k < rows; k++)
+                        {
+                            if (board[i, k] == null)
+                            {
+                                newRow = k;
+                            }
+                        }
+                        if (newRow != j)
+                        {
+                            board[i, newRow] = board[i, j];
+                            board[i, j] = null;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    if (board[i, j] != null)
+                    {
+                        board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
+                    }
+                }
+            }
+
             matches.Clear();
         }
     }

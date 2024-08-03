@@ -11,6 +11,7 @@ TagManager:
   - GrappleObject
   - Blockable
   - NonBlockable
+  - Tile
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public bool selected = false;
+    public bool matched = false;
     public string type;
 
     // Start is called before the first frame update
