@@ -96,7 +96,7 @@ public class MatchingManagement : MonoBehaviour
                     {
                         aMatch.matchedTiles.Add(board[currentCol, currentRow]);
                     }
-                    else if(aMatch.matchedTiles[0].GetComponent<Tile>().type == board[currentCol, currentRow].GetComponent<Tile>().type)
+                    else if (aMatch.matchedTiles[0].GetComponent<Tile>().type == board[currentCol, currentRow].GetComponent<Tile>().type)
                     {
                         aMatch.matchedTiles.Add(board[currentCol, currentRow]);
                     }
@@ -121,6 +121,7 @@ public class MatchingManagement : MonoBehaviour
                     aMatch.matchedTiles = new List<GameObject>();
                 }
                 aMatch.matchedTiles.Clear();
+                aMatch.matchedTiles = new List<GameObject>();
             }
 
             for (int i = 0; i < rows; i++)
@@ -165,6 +166,8 @@ public class MatchingManagement : MonoBehaviour
             {
                 for (int j = 0; j < matches[i].matchedTiles.Count; j++)
                 {
+                    matches[i].matchedTiles[j].gameObject.GetComponent<Tile>().matched = true;
+                    matches[i].matchedTiles[j].GetComponent<Tile>().MatchEffect();
                     Destroy(matches[i].matchedTiles[j]);
                     matches[i].matchedTiles[j] = null;
                 }
@@ -216,6 +219,18 @@ public class MatchingManagement : MonoBehaviour
             }
 
             matches.Clear();
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    if (board[i, j] == null)
+                    {
+                        board[i, j] = Instantiate(GenerateTile());
+                        board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
+                    }
+                }
+            }
         }
     }
 

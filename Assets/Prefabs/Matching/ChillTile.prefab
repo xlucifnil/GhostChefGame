@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
+  matched: 0
   type: Chill
+  destroyEffect: {fileID: 4007503238978434185, guid: a92c91e43905a8f49b463e1d7f7d6551, type: 3}
 --- !u!58 &-3838702178039510603
 CircleCollider2D:
   m_ObjectHideFlags: 0
