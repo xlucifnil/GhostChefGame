@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CookingStep : MonoBehaviour
 {
-    public GameObject bonusTiles;
-    public GameObject penaltyTiles;
-    public int duration = 3;
+    public string stepName;
+    public GameObject[] bonusTiles;
+    public GameObject[] penaltyTiles;
 
     // Start is called before the first frame update
     void Start()
