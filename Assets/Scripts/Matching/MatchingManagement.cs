@@ -23,6 +23,7 @@ public class MatchingManagement : MonoBehaviour
     public GameObject[] cookingSteps;
     int currentTurn = 1;
     List<match> matches;
+    bool moveMade = false;
     
     
     // Start is called before the first frame update
@@ -39,17 +40,21 @@ public class MatchingManagement : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (firstClicked == null && hit != false && hit.collider.gameObject.tag == "Tile")
+            if (hit != false)
             {
-                firstClicked = hit.collider.gameObject;
-            }
-            else if(firstClicked == hit.collider.gameObject && hit != false && hit.collider.gameObject.tag == "Tile")
-            {
-                firstClicked = null;
-            }
-            else if(secondClicked == null && hit != false && hit.collider.gameObject.tag == "Tile")
-            {
-                secondClicked = hit.collider.gameObject;
+                if (firstClicked == null && hit != false && hit.collider.gameObject.tag == "Tile")
+                {
+                    firstClicked = hit.collider.gameObject;
+                }
+                else if (firstClicked == hit.collider.gameObject && hit != false && hit.collider.gameObject.tag == "Tile")
+                {
+                    firstClicked = null;
+                }
+                else if (secondClicked == null && hit != false && hit.collider.gameObject.tag == "Tile")
+                {
+                    secondClicked = hit.collider.gameObject;
+                    moveMade = true;
+                }
             }
         }
 
@@ -256,6 +261,12 @@ public class MatchingManagement : MonoBehaviour
         matches.Clear();
 
         RefillBoard();
+
+        if(moveMade)
+        {
+            currentTurn++;
+            moveMade = false;
+        }
     }
 
     public void GenerateBoard()
