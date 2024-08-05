@@ -11,11 +11,13 @@ public class MatchingManagement : MonoBehaviour
         public List<GameObject> matchedTiles;
     }
 
+
     public GameObject[] tileTypes;
     public int rows, cols;
     public float gridSpacing;
     public GameObject[,] board;
     public GameObject firstClicked, secondClicked;
+    public GameObject[] cookingSteps;
     List<match> matches;
     
     
@@ -54,18 +56,19 @@ public class MatchingManagement : MonoBehaviour
             {
                 for (int j = 0; j < rows; j++)
                 {
-                    if(firstClicked == board[i,j])
+                    if (firstClicked == board[i, j])
                     {
                         firstCol = i;
                         firstRow = j;
                     }
-                    if(secondClicked == board[i,j])
+                    if (secondClicked == board[i, j])
                     {
                         secondCol = i;
                         secondRow = j;
                     }
                 }
             }
+
 
             Vector2 secondPos = secondClicked.transform.position;
             secondClicked.transform.position = firstClicked.transform.position;
@@ -76,7 +79,7 @@ public class MatchingManagement : MonoBehaviour
 
             firstClicked = null;
             secondClicked = null;
-
+        }
             int currentRow = 0;
             int currentCol = 0;
 
@@ -220,29 +223,181 @@ public class MatchingManagement : MonoBehaviour
 
             matches.Clear();
 
-            for (int i = 0; i < cols; i++)
-            {
-                for (int j = 0; j < rows; j++)
-                {
-                    if (board[i, j] == null)
-                    {
-                        board[i, j] = Instantiate(GenerateTile());
-                        board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
-                    }
-                }
-            }
-        }
+            RefillBoard();
     }
 
     public void GenerateBoard()
     {
         board = new GameObject[cols, rows];
+
         for (int i = 0; i < cols; i++)
         {
             for (int j = 0; j < rows; j++)
             {
                 board[i, j] = Instantiate(GenerateTile());
                 board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
+            }
+        }
+       
+        do
+        {
+            RefillBoard();
+            int currentRow = 0;
+            int currentCol = 0;
+
+
+            matches = new List<match>();
+            match aMatch = new match();
+            aMatch.matchedTiles = new List<GameObject>();
+
+            for (int i = 0; i < cols; i++)
+            {
+                currentCol = i;
+                for (int j = 0; j < rows; j++)
+                {
+                    currentRow = j;
+
+                    if (j == 0)
+                    {
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                    else if (aMatch.matchedTiles[0].GetComponent<Tile>().type == board[currentCol, currentRow].GetComponent<Tile>().type)
+                    {
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                    else
+                    {
+                        if (aMatch.matchedTiles.Count >= 3)
+                        {
+                            for (int k = 0; k < aMatch.matchedTiles.Count; k++)
+                            {
+                                board[currentCol, currentRow - 1 - k].GetComponent<Tile>().matched = true;
+                            }
+                            matches.Add(aMatch);
+                            aMatch.matchedTiles = new List<GameObject>();
+                        }
+                        aMatch.matchedTiles.Clear();
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                }
+                if (aMatch.matchedTiles.Count >= 3)
+                {
+                    matches.Add(aMatch);
+                    aMatch.matchedTiles = new List<GameObject>();
+                }
+                aMatch.matchedTiles.Clear();
+                aMatch.matchedTiles = new List<GameObject>();
+            }
+
+            for (int i = 0; i < rows; i++)
+            {
+                currentRow = i;
+                for (int j = 0; j < cols; j++)
+                {
+                    currentCol = j;
+
+                    if (j == 0)
+                    {
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                    else if (aMatch.matchedTiles[0].GetComponent<Tile>().type == board[currentCol, currentRow].GetComponent<Tile>().type)
+                    {
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                    else
+                    {
+                        if (aMatch.matchedTiles.Count >= 3)
+                        {
+                            for (int k = 0; k < aMatch.matchedTiles.Count; k++)
+                            {
+                                board[currentCol - 1 - k, currentRow].GetComponent<Tile>().matched = true;
+                            }
+                            matches.Add(aMatch);
+                            aMatch.matchedTiles = new List<GameObject>();
+                        }
+                        aMatch.matchedTiles.Clear();
+                        aMatch.matchedTiles.Add(board[currentCol, currentRow]);
+                    }
+                }
+                if (aMatch.matchedTiles.Count >= 3)
+                {
+                    matches.Add(aMatch);
+                    aMatch.matchedTiles = new List<GameObject>();
+                }
+                aMatch.matchedTiles.Clear();
+            }
+
+            for (int i = 0; i < matches.Count; i++)
+            {
+                for (int j = 0; j < matches[i].matchedTiles.Count; j++)
+                {
+                    matches[i].matchedTiles[j].gameObject.GetComponent<Tile>().matched = true;
+                    Destroy(matches[i].matchedTiles[j]);
+                    matches[i].matchedTiles[j] = null;
+                }
+            }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    if (board[i, j].GetComponent<Tile>().matched == true)
+                    {
+                        board[i, j] = null;
+                    }
+                }
+            }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = rows - 1; j >= 0; j--)
+                {
+                    if (board[i, j] != null)
+                    {
+                        int newRow = j;
+                        for (int k = j; k < rows; k++)
+                        {
+                            if (board[i, k] == null)
+                            {
+                                newRow = k;
+                            }
+                        }
+                        if (newRow != j)
+                        {
+                            board[i, newRow] = board[i, j];
+                            board[i, j] = null;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    if (board[i, j] != null)
+                    {
+                        board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
+                    }
+                }
+            }
+            
+        } while (checkMissingTiles());
+
+        
+    }
+
+    public void RefillBoard()
+    {
+        for (int i = 0; i < cols; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if (board[i, j] == null)
+                {
+                    board[i, j] = Instantiate(GenerateTile());
+                    board[i, j].transform.position = new Vector2(gameObject.transform.position.x + (i * gridSpacing), gameObject.transform.position.y + (-j * gridSpacing));
+                }
             }
         }
     }
@@ -254,5 +409,22 @@ public class MatchingManagement : MonoBehaviour
         tile = tileTypes[Random.Range(0,tileTypes.Length)];
 
         return tile;
+    }
+
+    public bool checkMissingTiles()
+    {
+        bool missing = false;
+        for (int i = 0; i < cols; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if(board[i, j] == null)
+                {
+                    missing = true;
+                }
+            }
+        }
+
+        return missing;
     }
 }

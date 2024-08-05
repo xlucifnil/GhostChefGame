@@ -122,6 +122,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &792827359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792827361}
+  - component: {fileID: 792827360}
+  m_Layer: 0
+  m_Name: CookingStep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &792827360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792827359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65fcf2592c10654ab0c4165e2ab506d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTiles: {fileID: 0}
+  penaltyTiles: {fileID: 0}
+  duration: 3
+--- !u!4 &792827361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792827359}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.328811, y: 1.1802738, z: -9.970732}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &941133481
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +301,7 @@ MonoBehaviour:
   gridSpacing: 1.25
   firstClicked: {fileID: 0}
   secondClicked: {fileID: 0}
+  cookingSteps: []
 --- !u!4 &1595701459
 Transform:
   m_ObjectHideFlags: 0
@@ -327,3 +375,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 941133484}
   - {fileID: 1595701459}
+  - {fileID: 792827361}
