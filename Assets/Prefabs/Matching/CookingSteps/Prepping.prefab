@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6557540762689983474
+--- !u!1 &3785002887049773431
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4203909358718504122}
-  - component: {fileID: 652286190816065605}
+  - component: {fileID: 235540051785113715}
+  - component: {fileID: 5894125980443075246}
   m_Layer: 0
-  m_Name: Baking
+  m_Name: Prepping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4203909358718504122
+--- !u!4 &235540051785113715
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557540762689983474}
+  m_GameObject: {fileID: 3785002887049773431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.328811, y: 1.1802738, z: -9.970732}
@@ -32,20 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &652286190816065605
+--- !u!114 &5894125980443075246
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557540762689983474}
+  m_GameObject: {fileID: 3785002887049773431}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d65fcf2592c10654ab0c4165e2ab506d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepName: Baking
+  stepName: Prepping
   bonusTiles:
-  - {fileID: 7858119881965506228, guid: 0c8d02a4a9bf7764e81fd2d28bd1ea70, type: 3}
+  - {fileID: 4091856856137785040, guid: 61dd25cc421f66342b5adaf96b3ecd00, type: 3}
   penaltyTiles:
-  - {fileID: 729438065319778310, guid: 14b8c4dc583df694abb7cd695b716893, type: 3}
+  - {fileID: 7858119881965506228, guid: 0c8d02a4a9bf7764e81fd2d28bd1ea70, type: 3}
