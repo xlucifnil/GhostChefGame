@@ -22,5 +22,9 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage( int damage)
     {
         health -= damage - defense;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
