@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 20f;
+    public float horizontal;
+    public float speed = 8f;
+    public float jumpingPower = 20f;
+    public float hoverModifier = .2f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
@@ -24,11 +25,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
-            else if (rb.velocity.y <= 0f)
-            {
-                rb.gravityScale = 0.2f;
-            }
         }
+
+        if(Input.GetButton("Jump") && rb.velocity.y <= 0f)
+        {
+            rb.gravityScale = hoverModifier;
+        }
+
         //Debug.Log(rb.velocity);
 
         if (Input.GetButtonUp("Jump"))
