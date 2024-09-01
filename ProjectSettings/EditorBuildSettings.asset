@@ -20,4 +20,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Room2.unity
     guid: d136e32bbdd220d4d833bd1dd48f78e5
+  - enabled: 1
+    path: Assets/Scenes/Map/Tutorial/RT1.unity
+    guid: 38258d91f94fdb24a931188985d5e730
+  - enabled: 1
+    path: Assets/Scenes/Map/Tutorial/RT2.unity
+    guid: 833f22a283cde494bb4de875a35a2d9b
+  - enabled: 1
+    path: Assets/Scenes/Map/Tutorial/RT3.unity
+    guid: de86f1c34284ae942aa1fbfe27781d1f
+  - enabled: 1
+    path: Assets/Scenes/Map/Tutorial/RT4.unity
+    guid: 587698738e349b34bb8891362d92295d
+  - enabled: 1
+    path: Assets/Scenes/Map/Tutorial/RT5.unity
+    guid: 6250435d94fe6c84f8712690789a2725
+  - enabled: 1
+    path: Assets/Scenes/Map/DepressionZone/RDS.unity
+    guid: 51d1a6645b590f2469c02e00a5e1aa7c
   m_configObjects: {}
