@@ -53,4 +53,14 @@ public class PlayerStats : MonoBehaviour
             GetComponent<SpriteRenderer>().color = invulnColor;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyAttack" && !invulnerable)
+        {
+            TakeDamage(collision.GetComponent<EnemyAttack>().damage);
+            invulnerable = true;
+            GetComponent<SpriteRenderer>().color = invulnColor;
+        }
+    }
 }
