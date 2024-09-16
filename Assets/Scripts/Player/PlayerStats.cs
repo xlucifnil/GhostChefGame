@@ -52,11 +52,23 @@ public class PlayerStats : MonoBehaviour
             invulnerable = true;
             GetComponent<SpriteRenderer>().color = invulnColor;
         }
+        if (collision.gameObject.tag == "Enemy" && !invulnerable)
+        {
+            TakeDamage(collision.GetComponent<EnemyAttack>().damage);
+            invulnerable = true;
+            GetComponent<SpriteRenderer>().color = invulnColor;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyAttack" && !invulnerable)
+        {
+            TakeDamage(collision.GetComponent<EnemyAttack>().damage);
+            invulnerable = true;
+            GetComponent<SpriteRenderer>().color = invulnColor;
+        }
+        if (collision.gameObject.tag == "Enemy" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;

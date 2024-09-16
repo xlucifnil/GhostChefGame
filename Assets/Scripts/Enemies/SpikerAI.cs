@@ -19,6 +19,8 @@ public class SpikerAI : MonoBehaviour
     public float moveSpeed = 1.0f;
     public float guardTime = 1.0f;
     float currentGuardTime;
+    public float exhaustTime = 1.0f;
+    float currentExhaustTime;
     public float attackPause = 2.0f;
     float currentAttackPause;
     public float guardDistance = 10f;
@@ -37,6 +39,7 @@ public class SpikerAI : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         currentGuardTime = guardTime;
         currentAttackPause = attackPause;
+        currentExhaustTime = exhaustTime;
     }
 
     // Update is called once per frame
@@ -53,11 +56,14 @@ public class SpikerAI : MonoBehaviour
                 {
                     myRigidbody.velocity = -transform.right * moveSpeed;
                 }
-
-                if(Vector2.Distance(gameObject.transform.position, player.transform.position) < guardDistance)
+                currentExhaustTime -= Time.deltaTime;
+                if (currentExhaustTime < 0)
                 {
-                    currentState = State.Guard;
-                    myRigidbody.velocity = myRigidbody.velocity*0f;
+                    if (Vector2.Distance(gameObject.transform.position, player.transform.position) < guardDistance)
+                    {
+                        currentState = State.Guard;
+                        myRigidbody.velocity = myRigidbody.velocity * 0f;
+                    }
                 }
                 break;
 
@@ -73,7 +79,7 @@ public class SpikerAI : MonoBehaviour
                         }
                         spikes.Clear();
                         currentGuardTime = guardTime;
-
+                        currentExhaustTime = exhaustTime;
                     }
                     else if (currentGuardTime == guardTime)
                     {
@@ -84,8 +90,6 @@ public class SpikerAI : MonoBehaviour
                             Debug.Log("Spikes");
                             GameObject aSpike = Instantiate(spike, spikeSpawners[i].transform.position, spikeSpawners[i].transform.rotation);
                             spikes.Add(aSpike);
-                            //spikes[i].name = "Spike" + i;
-
                         }
                         currentGuardTime -= Time.deltaTime;
                     }
@@ -101,6 +105,7 @@ public class SpikerAI : MonoBehaviour
                 {
                     currentState = State.Wander;
                     currentAttackPause = attackPause;
+                    currentExhaustTime = exhaustTime;
                 }
                 else
                 {

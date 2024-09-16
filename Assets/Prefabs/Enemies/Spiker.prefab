@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 6745214599245204668}
   - component: {fileID: 357098293663105523}
   - component: {fileID: 2025825011759475749}
+  - component: {fileID: 3433780449341605118}
   - component: {fileID: 878022319948766832}
   - component: {fileID: 4928078732634366873}
   m_Layer: 8
@@ -360,7 +361,8 @@ MonoBehaviour:
   currentState: 0
   facingRight: 1
   moveSpeed: 1
-  guardTime: 4
+  guardTime: 2
+  exhaustTime: 3
   attackPause: 1
   guardDistance: 2
   spikeSpeed: 5
@@ -386,6 +388,19 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   defense: 0
+--- !u!114 &3433780449341605118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6005427601653467805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be98429b342821b4892b8f60f646ddb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!61 &878022319948766832
 BoxCollider2D:
   m_ObjectHideFlags: 0
