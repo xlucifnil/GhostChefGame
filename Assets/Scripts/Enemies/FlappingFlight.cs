@@ -8,20 +8,19 @@ public class FlappingFlight : MonoBehaviour
     public GameObject midPoint;
     public float minHeight = 1.0f;
     public float flapPower;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float flapTime = 1f;
+    float currentFlapTime = 0f;
 
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.transform.localPosition.y <= minHeight)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * flapPower);
-        }
+        currentFlapTime -= Time.deltaTime;
 
-        
+        if(gameObject.transform.localPosition.y <= minHeight && currentFlapTime <= 0f)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity.Set(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * flapPower);
+            currentFlapTime = flapTime;
+        }
     }
 }
