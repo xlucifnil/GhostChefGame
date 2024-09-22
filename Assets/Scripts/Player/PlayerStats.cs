@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     public int numSnacks = 3;
     public int maxSnacks = 3;
     public int snackHealing = 2;
+    public float maxEnergy = 100;
+    public float currentEnergy = 50;
     public float invulnDuration = 1;
     float invulnTime;
     public bool invulnerable = false;
@@ -39,7 +41,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
 
         }
@@ -60,7 +62,7 @@ public class PlayerStats : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "EnemyAttack" && !invulnerable)
+        if (collision.gameObject.tag == "EnemyAttack" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
@@ -95,10 +97,16 @@ public class PlayerStats : MonoBehaviour
         numSnacks--;
         playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
         health += snackHealing;
-        if(health > maxHealth)
+        if (health > maxHealth)
         {
             health = maxHealth;
         }
         playerUI.GetComponent<PlayerUI>().DisplayHealth();
+    }
+
+    public void SpendEnergy(float spent)
+    {
+        currentEnergy -= spent;
+        playerUI.GetComponent<PlayerUI>().DisplayEnergy();
     }
 }

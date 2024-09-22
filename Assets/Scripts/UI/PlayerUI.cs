@@ -14,11 +14,13 @@ public class PlayerUI : MonoBehaviour
     public int heartSpacing;
     public List<Image> hearts = new List<Image>();
     public TMPro.TextMeshProUGUI SnackText;
+    public Image energyBar;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         DisplayHealth();
+        DisplayEnergy();
     }
 
     public void DisplayHealth()
@@ -53,6 +55,14 @@ public class PlayerUI : MonoBehaviour
                 aHeart.transform.position = new Vector2(aHeart.transform.position.x + heartOffset.x + (heartSpacing * hearts.Count) - Screen.width / 2, aHeart.transform.position.y + heartOffset.y + Screen.height / 2);
                 hearts.Add(aHeart);
             }
+        }
+    }
+
+    public void DisplayEnergy()
+    {
+        if (player != null)
+        {
+            energyBar.fillAmount = player.GetComponent<PlayerStats>().currentEnergy / player.GetComponent<PlayerStats>().maxEnergy;
         }
     }
 }
