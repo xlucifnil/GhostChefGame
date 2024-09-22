@@ -174,6 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78207d2c146f83f4bbedc772c04c5fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 0
+  speed: 8
+  jumpingPower: 20
+  hoverModifier: 0.2
   rb: {fileID: 6620358792034883293}
   groundCheck: {fileID: 3196861092743915889}
   groundLayer:
@@ -204,6 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ec697db977b0d42aefa612d1261ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 6
+  health: 6
+  defense: 0
+  invulnDuration: 1
+  invulnerable: 0
+  invulnColor: {r: 1, g: 1, b: 1, a: 0.50980395}
 --- !u!1 &8468233691270703902
 GameObject:
   m_ObjectHideFlags: 0

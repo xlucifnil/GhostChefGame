@@ -7,16 +7,22 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth = 5;
     public int health = 5;
     public int defense = 0;
+    public int numSnacks = 3;
+    public int maxSnacks = 3;
+    public int snackHealing = 2;
     public float invulnDuration = 1;
     float invulnTime;
     public bool invulnerable = false;
     public Color invulnColor = Color.white;
     Color originalColor = Color.white;
+    GameObject playerUI;
 
     private void Start()
     {
         invulnTime = invulnDuration;
         originalColor = GetComponent<SpriteRenderer>().color;
+        playerUI = GameObject.Find("PlayerUI");
+        playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
     }
 
     private void Update()
@@ -32,12 +38,20 @@ public class PlayerStats : MonoBehaviour
                 GetComponent<SpriteRenderer>().color = originalColor;
             }
         }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+
+        }
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage - defense;
-
+        if (playerUI != null)
+        {
+            playerUI.GetComponent<PlayerUI>().DisplayHealth();
+        }
         if (health < 0)
         {
             Destroy(gameObject);
@@ -74,5 +88,17 @@ public class PlayerStats : MonoBehaviour
             invulnerable = true;
             GetComponent<SpriteRenderer>().color = invulnColor;
         }
+    }
+
+    public void EatSnack()
+    {
+        numSnacks--;
+        playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
+        health += snackHealing;
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        playerUI.GetComponent<PlayerUI>().DisplayHealth();
     }
 }
