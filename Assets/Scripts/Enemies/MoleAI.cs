@@ -15,6 +15,7 @@ public class MoleAI : MonoBehaviour
     Vector2 startPosition;
     public float jumpPower;
     public float jumpDelay;
+    float currentjumpDelay;
     public float fallSpeed;
     public float detectionRange;
     public GameObject player;
@@ -41,6 +42,7 @@ public class MoleAI : MonoBehaviour
                 {
                     if (player.transform.position.x >= transform.position.x - detectionRange && player.transform.position.x <= transform.position.x + detectionRange)
                     {
+                        currentjumpDelay = jumpDelay;
                         currentState = States.Jumping;
                     }
                 }
@@ -48,11 +50,14 @@ public class MoleAI : MonoBehaviour
                 break;
 
             case States.Jumping:
-                currentState = States.Falling;
-                gameObject.GetComponent<Rigidbody2D>().velocity.Set(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
-                gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
-                gameObject.GetComponent<Rigidbody2D>().gravityScale = fallSpeed;
-
+                currentjumpDelay -= Time.deltaTime;
+                if (currentjumpDelay <= 0)
+                {
+                    currentState = States.Falling;
+                    gameObject.GetComponent<Rigidbody2D>().velocity.Set(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+                    gameObject.GetComponent<Rigidbody2D>().gravityScale = fallSpeed;
+                }
                 break;
 
             case States.Falling:
