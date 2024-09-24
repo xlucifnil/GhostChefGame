@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6404646692171094355}
   - component: {fileID: 5127980662681203934}
   - component: {fileID: 78995619232956649}
+  - component: {fileID: 6111024981725866343}
   m_Layer: 9
   m_Name: Mole
   m_TagString: Mole
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2537175091890212410}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.151159, z: 0}
+  m_LocalPosition: {x: 0, y: -5.151159, z: 1}
   m_LocalScale: {x: 1, y: 6.839945, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -181,6 +182,21 @@ MonoBehaviour:
   detectionRange: 1
   player: {fileID: 0}
   currentState: 0
+--- !u!114 &6111024981725866343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537175091890212410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9705c3e1e89b13448982a0315a3b220e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  maxHealth: 1
+  defense: 0
 --- !u!1 &3608883403632071197
 GameObject:
   m_ObjectHideFlags: 0
