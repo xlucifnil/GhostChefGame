@@ -1008,13 +1008,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856422686}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21, y: -24.02, z: 0}
-  m_LocalScale: {x: 0.53601646, y: 2.2042, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.45399043, w: 0.8910066}
+  m_LocalPosition: {x: 1.7824, y: -23.4403, z: 0}
+  m_LocalScale: {x: 0.53601646, y: 6.1161737, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -54}
 --- !u!1 &860707524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,6 +1614,10 @@ PrefabInstance:
       propertyPath: health
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3742575452836113509, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: currentEnergy
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: snackTime
       value: 5
@@ -2034,9 +2038,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2537175091890212410, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3608883403632071197, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
       propertyPath: m_Name
       value: MoleHole
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741098433160933540, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,7 +12,7 @@ public class MoleAI : MonoBehaviour
         Falling
     }
 
-    Vector2 startPosition;
+    Vector3 startPosition;
     public float jumpPower;
     public float jumpDelay;
     float currentjumpDelay;
@@ -66,6 +66,7 @@ public class MoleAI : MonoBehaviour
                     gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                     transform.position = startPosition;
+                    
                     currentState = States.Waiting;
                 }
 
