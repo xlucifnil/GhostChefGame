@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         invulnTime = invulnDuration;
-        originalColor = GetComponent<SpriteRenderer>().color;
+        originalColor = gameObject.transform.parent.GetComponent<SpriteRenderer>().color;
         playerUI = GameObject.Find("PlayerUI");
         playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
     }
@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
             {
                 invulnTime = invulnDuration;
                 invulnerable = false;
-                GetComponent<SpriteRenderer>().color = originalColor;
+                gameObject.transform.parent.GetComponent<SpriteRenderer>().color = originalColor;
             }
         }
 
@@ -66,13 +66,13 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
         }
         if (collision.gameObject.tag == "Enemy" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
         }
     }
 
@@ -82,13 +82,13 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
         }
         if (collision.gameObject.tag == "Enemy" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
         }
     }
 

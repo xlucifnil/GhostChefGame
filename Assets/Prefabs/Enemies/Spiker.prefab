@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 572170407095155962}
   - component: {fileID: 2066360010039203358}
   m_Layer: 0
-  m_Name: Spiker
+  m_Name: SpikerCollision
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2962941736288675968}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2900004, y: 20.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,6 +533,7 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   defense: 0
+  basicHitBox: 0
 --- !u!114 &3433780449341605118
 MonoBehaviour:
   m_ObjectHideFlags: 0

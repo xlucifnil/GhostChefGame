@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DeleteHitbox : MonoBehaviour
 {
-    public int AttackDuration; //Ticks?
-    int count = 0;
+    public float AttackDuration;
+    float count = 0;
 
     // Update is called once per frame
     void Update()
     {
-        count++;
+        count += Time.deltaTime;
 
-        if (count == AttackDuration)
+        if (count >= AttackDuration)
             Destroy(gameObject);
     }
 }
