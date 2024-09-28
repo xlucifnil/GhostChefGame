@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7689783149078446774}
   - component: {fileID: 572170407095155962}
   - component: {fileID: 2066360010039203358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpikerCollision
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}

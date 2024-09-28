@@ -197,6 +197,7 @@ MonoBehaviour:
   health: 1
   maxHealth: 1
   defense: 0
+  basicHitBox: 1
 --- !u!1 &3608883403632071197
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,9 +295,9 @@ GameObject:
   - component: {fileID: 2197696602302645564}
   - component: {fileID: 4045019892681614158}
   - component: {fileID: 6123074875987139438}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MoleHitBox
-  m_TagString: Enemy
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

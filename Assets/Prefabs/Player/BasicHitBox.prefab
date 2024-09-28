@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7973459480568137748}
   - component: {fileID: -3637952930233546559}
   - component: {fileID: 8481394104145255727}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BasicHitBox
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
