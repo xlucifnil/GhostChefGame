@@ -5,15 +5,22 @@ using UnityEngine;
 public class BasicAttack : MonoBehaviour
 {
     [SerializeField] GameObject AttackHitBox; // Default faces right
+    public float timeBetweenAttacks = 1;
+    float currentTimeBetween = 0;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Attack();
+        currentTimeBetween -= Time.deltaTime;
+        if (currentTimeBetween <= 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+                Attack();
+        }
     }
 
     private void Attack()
     {
+        currentTimeBetween = timeBetweenAttacks;
         Vector3 mousePlayerVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Get the vector from player to mouse
 
         if (Mathf.Abs(mousePlayerVector.x) > Mathf.Abs(mousePlayerVector.y)) // If mouse is more Left/Right than Up/Down

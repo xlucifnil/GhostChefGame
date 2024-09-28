@@ -174,10 +174,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolPoint (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4681697298707536690, guid: 834ed2f0067bc774eb3ef58281f48173, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -494,10 +490,6 @@ PrefabInstance:
     - target: {fileID: 4681697298707536690, guid: 834ed2f0067bc774eb3ef58281f48173, type: 3}
       propertyPath: m_Name
       value: PatrolPoint (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4681697298707536690, guid: 834ed2f0067bc774eb3ef58281f48173, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -937,23 +929,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &843144196 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8775831604229377884, guid: 7c6cfa44ce9bed94abfd22ad2204dcea, type: 3}
-  m_PrefabInstance: {fileID: 2051028762}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &843144201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843144196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae470524a115e94eb0d6c2b2405ec9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &856422686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,18 +1758,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1740185114088660177, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1740185114088660177, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2962941736288675968, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
-      propertyPath: m_Name
-      value: SpikerHitbox
-      objectReference: {fileID: 0}
     - target: {fileID: 5322845430691081481, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.24
@@ -1838,10 +1801,6 @@ PrefabInstance:
     - target: {fileID: 6005427601653467805, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
       propertyPath: m_Name
       value: Spiker
-      objectReference: {fileID: 0}
-    - target: {fileID: 7689783149078446774, guid: 2e54eac9fd324e743aa5bfa6de3629d4, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2163,10 +2122,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8775831604229377884, guid: 7c6cfa44ce9bed94abfd22ad2204dcea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 843144201}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c6cfa44ce9bed94abfd22ad2204dcea, type: 3}
 --- !u!1001 &3184870177087175325
 PrefabInstance:
@@ -2233,26 +2189,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 138394425258638777, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 3874793160318834063, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 4780866003568734179, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4793709564844335919, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 6358103326714117291, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6744042780309731498, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.54
@@ -2296,22 +2232,6 @@ PrefabInstance:
     - target: {fileID: 7196270520192192388, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
       propertyPath: m_Name
       value: ShieldDude
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944053104355451952, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: health
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944053104355451952, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: maxHealth
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944053104355451952, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: basicHitBox
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8268955335075203357, guid: 86dd27ceac7b6ae45b2310b90505842a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
