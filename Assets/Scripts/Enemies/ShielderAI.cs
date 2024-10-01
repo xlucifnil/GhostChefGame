@@ -98,6 +98,7 @@ public class ShielderAI : MonoBehaviour
                         swordRight.SetActive(false);
                         swordUp.SetActive(false);
                         currentState = States.Idle;
+                        swung = false;
                     }
                 }
                 break;
