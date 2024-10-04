@@ -217,7 +217,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.11, y: -3.38, z: 0}
-  m_LocalScale: {x: 1, y: 1.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2984442305824783696}
@@ -265,7 +265,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 0, g: 1, b: 0.81838536, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -384,7 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4109207a59ca074b81796b529235796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackHitBox: {fileID: 5344893783601471750, guid: e9a0e48570c54894cadd57f4bc43cbd9, type: 3}
+  AttackHitBoxHorizontal: {fileID: 5344893783601471750, guid: e9a0e48570c54894cadd57f4bc43cbd9, type: 3}
+  AttackHitBoxVertical: {fileID: 5023847219486659453, guid: 717f5901636c4be4b9327618d5d87ed4, type: 3}
+  yOffset: 1.3
+  xOffset: 1
+  timeBetweenAttacks: 1
 --- !u!1 &8468233691270703902
 GameObject:
   m_ObjectHideFlags: 0

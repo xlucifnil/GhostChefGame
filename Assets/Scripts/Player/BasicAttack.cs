@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BasicAttack : MonoBehaviour
 {
-    [SerializeField] GameObject AttackHitBox; // Default faces right
+    [SerializeField] GameObject AttackHitBoxHorizontal; // Default faces right
+    [SerializeField] GameObject AttackHitBoxVertical;
+    public float yOffset = 0;
+    public float xOffset = 0;
     public float timeBetweenAttacks = 1;
     float currentTimeBetween = 0;
 
@@ -27,22 +30,22 @@ public class BasicAttack : MonoBehaviour
         {
             if (mousePlayerVector.x >= 0) // Right
             {
-                Instantiate(AttackHitBox, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
+                Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
             else // Left
             {
-                Instantiate(AttackHitBox, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
+                Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
         }
         else // If mouse is more Up/Down than Left/Right
         {
             if (mousePlayerVector.y >= 0) // Up
             {
-                Instantiate(AttackHitBox, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1), Quaternion.identity, gameObject.transform);
+                Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + yOffset), Quaternion.identity, gameObject.transform);
             }
             else // Down
             {
-                Instantiate(AttackHitBox, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1), Quaternion.identity, gameObject.transform);
+                Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - yOffset), Quaternion.identity, gameObject.transform);
             }
         }
     }
