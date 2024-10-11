@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         Canvas.SetActive(true);
-        //textBox.SetActive(true);
+        textBox.gameObject.SetActive(true);
         story = new Story(inkFile.text);
         message = textBox;
         tags = new List<string>();
@@ -55,11 +55,8 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (story.canContinue)
-        {
-            AdvanceDialogue();
-        }
-            if (Input.GetMouseButtonDown(0))
+       
+        if (Input.GetMouseButtonDown(0))
         {
             //Is there more to the story?
             if (story.canContinue)
@@ -175,9 +172,9 @@ public class DialogueManager : MonoBehaviour
                 case "color":
                     // SetTextColor(param);
                     break;
-                //case "talking":
+                case "talking":
                 //    SetSpeaker(param);
-                //    break;
+                    break;
                 case "end":
                     EndScript(param);
                     break;
@@ -192,9 +189,11 @@ public class DialogueManager : MonoBehaviour
     void EndScript(string param)
     {
         TextBacking.SetActive(false);
-        //textBox.SetActive(false);
+        textBox.gameObject.SetActive(false);
+        Canvas.SetActive(false);
         Debug.Log(param);
         Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
 }

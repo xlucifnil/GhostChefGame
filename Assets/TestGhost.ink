@@ -1,8 +1,11 @@
 I am a ghost
 
-They lived happily ever dead.
+- They lived happily ever dead.
 
--> Fin
+-> Finish
 
-===Fin
-    -> END
+=== Finish
+
+#end thing
+
+->END
