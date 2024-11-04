@@ -26,70 +26,76 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetButtonDown("Jump"))
+        if (Time.timeScale != 0f)
         {
-            if (IsGrounded())
+            horizontal = Input.GetAxisRaw("Horizontal");
+
+            if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                if (IsGrounded())
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                }
             }
-        }
 
-        if(Input.GetButton("Jump") && rb.velocity.y <= 0f)
-        {
-            rb.gravityScale = hoverModifier;
-        }
-
-        //Debug.Log(rb.velocity);
-
-        if (Input.GetButtonUp("Jump"))
-        {
-            if (rb.velocity.y > 0f)
+            if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                rb.gravityScale = hoverModifier;
             }
-            rb.gravityScale = 4;
-        }
 
-        if(IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && gameObject.GetComponent<PlayerStats>().numSnacks > 0)
-        {
-            snacking = true;
-        }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            currentSnackTime = snackTime;
-            snacking = false;
-        }
-        else if(!IsGrounded())
-        {
-            currentSnackTime = snackTime;
-            snacking = false;
-        }
+            //Debug.Log(rb.velocity);
 
-        if (snacking)
-        {
-            currentSnackTime -= Time.deltaTime;
-            if (currentSnackTime <= 0)
+            if (Input.GetButtonUp("Jump"))
             {
-                gameObject.GetComponent<PlayerStats>().EatSnack();
-                snacking = false;
+                if (rb.velocity.y > 0f)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                }
+                rb.gravityScale = 4;
+            }
+
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && gameObject.GetComponent<PlayerStats>().numSnacks > 0)
+            {
+                snacking = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
                 currentSnackTime = snackTime;
+                snacking = false;
             }
-        }
+            else if (!IsGrounded())
+            {
+                currentSnackTime = snackTime;
+                snacking = false;
+            }
 
-        Flip();
+            if (snacking)
+            {
+                currentSnackTime -= Time.deltaTime;
+                if (currentSnackTime <= 0)
+                {
+                    gameObject.GetComponent<PlayerStats>().EatSnack();
+                    snacking = false;
+                    currentSnackTime = snackTime;
+                }
+            }
+
+            Flip();
+        }
     }
 
     private void FixedUpdate()
     {
-        if(!snacking)
+        if (Time.timeScale != 0f)
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(horizontal * snackSpeed, rb.velocity.y);
+            if (!snacking)
+            {
+                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(horizontal * snackSpeed, rb.velocity.y);
+            }
         }
     }
 

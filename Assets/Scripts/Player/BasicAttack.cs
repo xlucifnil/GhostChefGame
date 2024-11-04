@@ -14,10 +14,13 @@ public class BasicAttack : MonoBehaviour
     private void Update()
     {
         currentTimeBetween -= Time.deltaTime;
-        if (currentTimeBetween <= 0)
+        if (Time.timeScale != 0f)
         {
-            if (Input.GetMouseButtonDown(0))
-                Attack();
+            if (currentTimeBetween <= 0)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    Attack();
+            }
         }
     }
 
