@@ -7,6 +7,11 @@ public class MenuController : MonoBehaviour
     public GameObject menu;
     public GameObject playerUI;
     // Update is called once per frame
+
+    private void Start()
+    {
+        playerUI = GameObject.Find("PlayerUI");
+    }
     void Update()
     {
         MenuToggle();
