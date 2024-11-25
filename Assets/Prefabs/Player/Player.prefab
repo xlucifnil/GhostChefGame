@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8376860624989387322}
   - component: {fileID: 4179882784823210863}
   - component: {fileID: 4716980911431762316}
+  - component: {fileID: 1949619248523868417}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -155,6 +156,23 @@ MonoBehaviour:
   invulnDuration: 1
   invulnerable: 0
   invulnColor: {r: 1, g: 1, b: 1, a: 0.50980395}
+--- !u!114 &1949619248523868417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814328226467920336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862efbe10189b54b802485d8f389e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bannana: 0
+  ice: 0
+  spice: 0
+  cherry: 0
+  tomato: 0
 --- !u!1 &2251356563410438707
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +221,7 @@ GameObject:
   - component: {fileID: 2834570298843331144}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,6 +10,13 @@ public class BasicAttack : MonoBehaviour
     public float xOffset = 0;
     public float timeBetweenAttacks = 1;
     float currentTimeBetween = 0;
+    GameObject player;
+    public GameObject testEffect;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void Update()
     {
@@ -50,6 +57,11 @@ public class BasicAttack : MonoBehaviour
             {
                 Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - yOffset), Quaternion.identity, gameObject.transform);
             }
+        }
+
+        if(player.GetComponent<PlayerInventory>().Drink.name == RECIPE.MilkShake)
+        {
+            Instantiate(testEffect);
         }
     }
 }

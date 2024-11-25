@@ -1499,6 +1499,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: pie
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: soda
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: fries
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: pizza
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: toast
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: burger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: cannoli
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: martini
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: milkShake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: mozzSticks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2529132250287896735, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.76
@@ -1543,6 +1583,10 @@ PrefabInstance:
       propertyPath: playerUI
       value: 
       objectReference: {fileID: 1680471897}
+    - target: {fileID: 5603505936226214988, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: testEffect
+      value: 
+      objectReference: {fileID: 1481094997775998074, guid: 91dca1393b8f3634bbb4f3e242d70f66, type: 3}
     - target: {fileID: 8015163158133218848, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_Name
       value: Player
