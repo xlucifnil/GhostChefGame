@@ -1505,7 +1505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: soda
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: fries
@@ -1517,11 +1517,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: toast
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: burger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: muffin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: Omelett
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: cannoli
@@ -1529,15 +1537,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: martini
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: milkShake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: mozzSticks
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2529132250287896735, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_LocalPosition.x

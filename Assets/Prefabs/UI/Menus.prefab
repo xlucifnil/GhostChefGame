@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7856357972790663749}
   mealType: 3
   recipe: 10
 --- !u!1 &201677863008073669
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7856357972790663749}
   mealType: 3
   recipe: 11
 --- !u!1 &537529815492650589
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 4530122586660103505}
   mealType: 2
   recipe: 8
 --- !u!1 &829369658073015229
@@ -3421,7 +3421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 4530122586660103505}
   mealType: 2
   recipe: 7
 --- !u!1 &5338702773452957471
@@ -3704,7 +3704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7767995233404478396}
   mealType: 1
   recipe: 3
 --- !u!1 &5469786107766078502
@@ -4120,7 +4120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7856357972790663749}
   mealType: 3
   recipe: 9
 --- !u!1 &6690848553919136477
@@ -5348,7 +5348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7767995233404478396}
   mealType: 1
   recipe: 4
 --- !u!1 &7856357972790663749
@@ -5897,7 +5897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 7767995233404478396}
   mealType: 1
   recipe: 5
 --- !u!1 &8942025777026092791
@@ -6046,7 +6046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8a777018e7f940b8b1563112fece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mealSlot: {fileID: 8237294704809937193}
+  mealSlot: {fileID: 4530122586660103505}
   mealType: 2
   recipe: 6
 --- !u!1 &9066375146854716735
