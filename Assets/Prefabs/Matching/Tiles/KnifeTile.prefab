@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8171989922112529923}
   - component: {fileID: -8487318321800585104}
   m_Layer: 0
-  m_Name: CutTile
+  m_Name: KnifeTile
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 0
   matched: 0
-  type: Cut
+  type: Knife
+  x: 0
+  y: 0
+  position: {x: 0, y: 0, z: 0}
   destroyEffect: {fileID: 3212029372887183685, guid: 191edd1dc7c188c43ba78ad31ce4ad09, type: 3}
 --- !u!58 &-8487318321800585104
 CircleCollider2D:

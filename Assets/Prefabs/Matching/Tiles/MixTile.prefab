@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -155177484643764892}
   - component: {fileID: 3550736095822588654}
   m_Layer: 0
-  m_Name: StirTile
+  m_Name: MixTile
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected: 0
   matched: 0
-  type: Stir
+  type: Mix
+  x: 0
+  y: 0
+  position: {x: 0, y: 0, z: 0}
   destroyEffect: {fileID: 5245355480716910579, guid: 923436c1b830bf44d93e225d482d46fe, type: 3}
 --- !u!58 &3550736095822588654
 CircleCollider2D:
