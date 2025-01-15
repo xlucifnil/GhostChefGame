@@ -10,9 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public float hoverModifier = .2f;
     public float snackSpeed = 4f;
     public float snackTime;
+    public float ectoTime = 0.5f;
+    float tillEctoTime = 0;
+    float tillFloorEcto = 0;
+    public float floorEctoOffset = 0.5f;
     float currentSnackTime;
-    public bool snacking = false;
+    bool snacking = false;
+    public GameObject ectoGlideTrail;
     private bool isFacingRight = true;
+    private GameObject player;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -21,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         currentSnackTime = snackTime;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -35,15 +42,23 @@ public class PlayerMovement : MonoBehaviour
                 if (IsGrounded())
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+                    tillEctoTime = 0;
                 }
             }
 
             if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
                 rb.gravityScale = hoverModifier;
+                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.Ectomash)
+                {
+                    tillEctoTime -= Time.deltaTime;
+                    if (tillEctoTime < 0 && !IsGrounded())
+                    {
+                        tillEctoTime = ectoTime;
+                        Instantiate(ectoGlideTrail,gameObject.transform.position, gameObject.transform.rotation);
+                    }
+                }
             }
-
-            //Debug.Log(rb.velocity);
 
             if (Input.GetButtonUp("Jump"))
             {
@@ -52,6 +67,16 @@ public class PlayerMovement : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 }
                 rb.gravityScale = 4;
+            }
+
+            if(IsGrounded() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Ectojello)
+            {
+                tillFloorEcto -= Time.deltaTime;
+                if(tillFloorEcto <= 0.0f)
+                {
+                    tillFloorEcto = ectoTime;
+                    Instantiate(ectoGlideTrail, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + floorEctoOffset), gameObject.transform.rotation);
+                }
             }
 
             if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && gameObject.GetComponent<PlayerStats>().numSnacks > 0)

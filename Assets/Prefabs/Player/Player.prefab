@@ -168,11 +168,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e862efbe10189b54b802485d8f389e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bannana: 0
-  ice: 0
-  spice: 0
-  cherry: 0
-  tomato: 0
+  martini: 0
+  soda: 0
+  milkShake: 0
+  burger: 0
+  pizza: 0
+  omelett: 0
+  ectomash: 0
+  mozzSticks: 0
+  toast: 0
+  pie: 0
+  cannoli: 0
+  muffin: 0
 --- !u!1 &2251356563410438707
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +391,7 @@ MonoBehaviour:
   hoverModifier: 0.2
   snackSpeed: 4
   snackTime: 5
-  snacking: 0
+  ectoGlideTrail: {fileID: 4017046094776405849, guid: 49556f332eb164f429caee510b0e5566, type: 3}
   rb: {fileID: 6620358792034883293}
   groundCheck: {fileID: 3601806789100972963}
   groundLayer:
@@ -407,6 +414,7 @@ MonoBehaviour:
   yOffset: 1.3
   xOffset: 1
   timeBetweenAttacks: 1
+  testEffect: {fileID: 0}
 --- !u!114 &2834570298843331144
 MonoBehaviour:
   m_ObjectHideFlags: 0

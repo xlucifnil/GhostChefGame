@@ -14,16 +14,17 @@ public enum MEALTYPE
 
 public enum RECIPE
 {
+    Null,
     Martini,
     Soda,
     MilkShake,
     Burger,
     Pizza,
     Omelett,
-    Fries,
+    Ectomash,
     MozzSticks,
     Toast,
-    Pie,
+    Ectojello,
     Cannoli,
     Muffin
 }
@@ -40,8 +41,13 @@ public class PlayerInventory : MonoBehaviour
     public Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool> { };
 
     //Meal Slots
-    public FoodSlot Drink, Main, Side, Dessert;
+    public FoodSlot Drink;
+    public FoodSlot Main;
+    public FoodSlot Side;
+    public FoodSlot Dessert;
     //Recipes
+    public Sprite nullFood;
+    public bool empty;
     //Drink
     [Header("Drinks")]
     public bool martini;
@@ -49,18 +55,24 @@ public class PlayerInventory : MonoBehaviour
     //Main
     [Header("Mains")]
     public bool burger;
-    public bool pizza, Omelett;
+    public bool pizza, omelett;
     //Side
     [Header("Sides")]
-    public bool fries;
+    public bool ectomash;
     public bool mozzSticks, toast;
     //Dessert
     [Header("Desserts")]
-    public bool pie;
+    public bool ectojello;
     public bool cannoli, muffin;
     //Upgrades
 
     //KeyItems
+
+    private void Start()
+    {
+        Side.name = RECIPE.Null;
+        Side.foodImage = nullFood;
+    }
 
     public void SwapDrink(RECIPE name, Sprite foodSprite)
     {
@@ -89,17 +101,18 @@ public class PlayerInventory : MonoBehaviour
     public void MakeRecipeList()
     {
         recipeList.Clear();
-        
+
+        recipeList.Add(RECIPE.Null, empty);
         recipeList.Add(RECIPE.Martini, martini);
         recipeList.Add(RECIPE.Soda, soda);
         recipeList.Add(RECIPE.MilkShake, milkShake);
         recipeList.Add(RECIPE.Burger, burger);
         recipeList.Add(RECIPE.Pizza, pizza);
-        recipeList.Add(RECIPE.Omelett, Omelett);
-        recipeList.Add(RECIPE.Fries, fries);
+        recipeList.Add(RECIPE.Omelett, omelett);
+        recipeList.Add(RECIPE.Ectomash, ectomash);
         recipeList.Add(RECIPE.MozzSticks, mozzSticks);
         recipeList.Add(RECIPE.Toast, toast);
-        recipeList.Add(RECIPE.Pie, pie);
+        recipeList.Add(RECIPE.Ectojello, ectojello);
         recipeList.Add(RECIPE.Cannoli, cannoli);
         recipeList.Add(RECIPE.Muffin, muffin);
     }
