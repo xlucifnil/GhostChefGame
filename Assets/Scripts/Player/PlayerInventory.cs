@@ -15,7 +15,7 @@ public enum MEALTYPE
 public enum RECIPE
 {
     Null,
-    Martini,
+    StingingBubbly,
     Soda,
     MilkShake,
     Burger,
@@ -50,7 +50,7 @@ public class PlayerInventory : MonoBehaviour
     public bool empty;
     //Drink
     [Header("Drinks")]
-    public bool martini;
+    public bool stingingBubbly;
     public bool soda, milkShake;
     //Main
     [Header("Mains")]
@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
         recipeList.Clear();
 
         recipeList.Add(RECIPE.Null, empty);
-        recipeList.Add(RECIPE.Martini, martini);
+        recipeList.Add(RECIPE.StingingBubbly, stingingBubbly);
         recipeList.Add(RECIPE.Soda, soda);
         recipeList.Add(RECIPE.MilkShake, milkShake);
         recipeList.Add(RECIPE.Burger, burger);

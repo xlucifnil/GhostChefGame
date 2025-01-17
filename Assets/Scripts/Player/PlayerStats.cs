@@ -13,6 +13,7 @@ public class PlayerStats : MonoBehaviour
     public float maxEnergy = 100;
     public float currentEnergy = 50;
     public float invulnDuration = 1;
+    public GameObject damageBurst;
     float invulnTime;
     public bool invulnerable = false;
     public Color invulnColor = Color.white;
@@ -50,6 +51,11 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage - defense;
+
+        if (gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.StingingBubbly)
+        {
+            Instantiate(damageBurst, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+        }
         if (playerUI != null)
         {
             playerUI.GetComponent<PlayerUI>().DisplayHealth();

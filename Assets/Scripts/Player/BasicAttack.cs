@@ -38,7 +38,7 @@ public class BasicAttack : MonoBehaviour
 
         if (Mathf.Abs(mousePlayerVector.x) > Mathf.Abs(mousePlayerVector.y)) // If mouse is more Left/Right than Up/Down
         {
-            if (mousePlayerVector.x >= 0) // Right
+            if (mousePlayerVector.x <= 0) // Right
             {
                 Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }

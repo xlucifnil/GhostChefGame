@@ -1622,6 +1622,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: empty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: fries
       value: 1
       objectReference: {fileID: 0}
@@ -1669,6 +1673,10 @@ PrefabInstance:
       propertyPath: mozzSticks
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1949619248523868417, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: stingingBubbly
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2529132250287896735, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.76
@@ -1709,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4716980911431762316, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: damageBurst
+      value: 
+      objectReference: {fileID: 6638265955573858510, guid: 7b67be3d0e0ac4941bed1f677350dec5, type: 3}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: ectoTime
       value: 0.1
