@@ -6,9 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float horizontal;
     public float speed = 8f;
+    public float hyperSpeedModifier = 2f;
+    public float emergencySpeedModifier = 2f;
+    public float emergencySpeedDuration = 2f;
+    float emergencyTimeLeft;
+    public float snackSpeedModifier = -4f;
     public float jumpingPower = 20f;
     public float hoverModifier = .2f;
-    public float snackSpeed = 4f;
+    public float lightHoverModifier = .1f;
     public float snackTime;
     public float ectoTime = 0.5f;
     float tillEctoTime = 0;
@@ -48,7 +53,15 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
-                rb.gravityScale = hoverModifier;
+                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.LightSide)
+                {
+                    rb.gravityScale = lightHoverModifier;
+                }
+                else
+                {
+                    rb.gravityScale = hoverModifier;
+                }
+                
                 if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.Ectomash)
                 {
                     tillEctoTime -= Time.deltaTime;
@@ -79,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && gameObject.GetComponent<PlayerStats>().numSnacks > 0)
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
             {
                 snacking = true;
             }
@@ -113,14 +126,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale != 0f)
         {
-            if (!snacking)
+            float moveSpeed = speed;
+
+            if(player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Hyper)
             {
-                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+                moveSpeed += hyperSpeedModifier;
             }
-            else
+            if (snacking)
             {
-                rb.velocity = new Vector2(horizontal * snackSpeed, rb.velocity.y);
+                moveSpeed += snackSpeedModifier;   
             }
+            if(emergencyTimeLeft > 0)
+            {
+                emergencyTimeLeft -= Time.deltaTime;
+                moveSpeed += emergencySpeedModifier;
+            }
+
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         }
     }
 
@@ -140,5 +162,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+    public void TurnOnEmergencySpeed()
+    {
+        emergencyTimeLeft = emergencySpeedDuration;
+    }
 }

@@ -16,17 +16,17 @@ public enum RECIPE
 {
     Null,
     StingingBubbly,
-    Soda,
-    MilkShake,
-    Burger,
-    Pizza,
-    Omelett,
+    ThinBroth,
+    Refreshing,
+    Lucky,
+    EnergizingDish,
+    StrechyDish,
     Ectomash,
-    MozzSticks,
+    LightSide,
     Toast,
     Ectojello,
-    Cannoli,
-    Muffin
+    Hyper,
+    EmergencyCandy
 }
 
 public class PlayerInventory : MonoBehaviour
@@ -51,19 +51,19 @@ public class PlayerInventory : MonoBehaviour
     //Drink
     [Header("Drinks")]
     public bool stingingBubbly;
-    public bool soda, milkShake;
+    public bool thinBroth, refreshing;
     //Main
     [Header("Mains")]
-    public bool burger;
-    public bool pizza, omelett;
+    public bool lucky;
+    public bool energizingDish, strechyDish;
     //Side
     [Header("Sides")]
     public bool ectomash;
-    public bool mozzSticks, toast;
+    public bool lightSide, toast;
     //Dessert
     [Header("Desserts")]
     public bool ectojello;
-    public bool cannoli, muffin;
+    public bool hyper, emergencyCandy;
     //Upgrades
 
     //KeyItems
@@ -104,16 +104,16 @@ public class PlayerInventory : MonoBehaviour
 
         recipeList.Add(RECIPE.Null, empty);
         recipeList.Add(RECIPE.StingingBubbly, stingingBubbly);
-        recipeList.Add(RECIPE.Soda, soda);
-        recipeList.Add(RECIPE.MilkShake, milkShake);
-        recipeList.Add(RECIPE.Burger, burger);
-        recipeList.Add(RECIPE.Pizza, pizza);
-        recipeList.Add(RECIPE.Omelett, omelett);
+        recipeList.Add(RECIPE.ThinBroth, thinBroth);
+        recipeList.Add(RECIPE.Refreshing, refreshing);
+        recipeList.Add(RECIPE.Lucky, lucky);
+        recipeList.Add(RECIPE.EnergizingDish, energizingDish);
+        recipeList.Add(RECIPE.StrechyDish, strechyDish);
         recipeList.Add(RECIPE.Ectomash, ectomash);
-        recipeList.Add(RECIPE.MozzSticks, mozzSticks);
+        recipeList.Add(RECIPE.LightSide, lightSide);
         recipeList.Add(RECIPE.Toast, toast);
         recipeList.Add(RECIPE.Ectojello, ectojello);
-        recipeList.Add(RECIPE.Cannoli, cannoli);
-        recipeList.Add(RECIPE.Muffin, muffin);
+        recipeList.Add(RECIPE.Hyper, hyper);
+        recipeList.Add(RECIPE.EmergencyCandy, emergencyCandy);
     }
 }

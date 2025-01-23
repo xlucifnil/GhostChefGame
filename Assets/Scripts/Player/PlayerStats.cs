@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -13,17 +14,21 @@ public class PlayerStats : MonoBehaviour
     public float maxEnergy = 100;
     public float currentEnergy = 50;
     public float invulnDuration = 1;
+    public float thinBrothInvulnBonus = 1;
+    public float refreshingSetTime = 5f;
+    public float refreshingCurrentTime;
     public GameObject damageBurst;
     float invulnTime;
     public bool invulnerable = false;
     public Color invulnColor = Color.white;
+    public Color refreshingColor = Color.blue;
     Color originalColor = Color.white;
     GameObject playerUI;
 
     private void Start()
     {
-        invulnTime = invulnDuration;
-        originalColor = gameObject.transform.parent.GetComponent<SpriteRenderer>().color;
+        refreshingCurrentTime = refreshingSetTime;
+        originalColor = gameObject.GetComponent<SpriteRenderer>().color;
         playerUI = GameObject.Find("PlayerUI");
         playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
     }
@@ -38,23 +43,46 @@ public class PlayerStats : MonoBehaviour
             {
                 invulnTime = invulnDuration;
                 invulnerable = false;
-                gameObject.transform.parent.GetComponent<SpriteRenderer>().color = originalColor;
+                gameObject.GetComponent<SpriteRenderer>().color = originalColor;
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if(gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.Refreshing)
         {
-
+            refreshingCurrentTime -= Time.deltaTime;
+            if(refreshingCurrentTime <= 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = refreshingColor;
+            }
         }
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage - defense;
+        if (refreshingCurrentTime <= 0)
+        {
+            refreshingCurrentTime = refreshingSetTime;
+            invulnTime = invulnDuration;
+        }
+        else
+        {
+            refreshingCurrentTime = refreshingSetTime;
+            health -= damage - defense;
 
+            invulnTime = invulnDuration;
+        }
+        
+        if(gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.ThinBroth)
+        {
+            invulnTime += thinBrothInvulnBonus;
+        }
         if (gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.StingingBubbly)
         {
             Instantiate(damageBurst, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+        }
+        if (gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.EmergencyCandy)
+        {
+            FindAnyObjectByType(typeof(PlayerMovement)).GetComponent<PlayerMovement>().TurnOnEmergencySpeed();
         }
         if (playerUI != null)
         {
@@ -72,13 +100,13 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.GetComponent<SpriteRenderer>().color = invulnColor;
         }
         if (collision.gameObject.tag == "Enemy" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.GetComponent<SpriteRenderer>().color = invulnColor;
         }
     }
 
@@ -88,13 +116,13 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.GetComponent<SpriteRenderer>().color = invulnColor;
         }
         if (collision.gameObject.tag == "Enemy" && !invulnerable)
         {
             TakeDamage(collision.GetComponent<EnemyAttack>().damage);
             invulnerable = true;
-            gameObject.transform.parent.GetComponent<SpriteRenderer>().color = invulnColor;
+            gameObject.GetComponent<SpriteRenderer>().color = invulnColor;
         }
     }
 
