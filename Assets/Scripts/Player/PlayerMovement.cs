@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     float currentSnackTime;
     bool snacking = false;
     public GameObject ectoGlideTrail;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     private GameObject player;
 
     [SerializeField] private Rigidbody2D rb;
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }

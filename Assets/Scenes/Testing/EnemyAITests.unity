@@ -2288,6 +2288,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2537175091890212410, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3608883403632071197, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
       propertyPath: m_Name
       value: MoleHole
@@ -2295,6 +2299,10 @@ PrefabInstance:
     - target: {fileID: 4741098433160933540, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5292934620005811082, guid: 91858df76a0a6e949aa6b2ce057f0141, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

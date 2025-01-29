@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BasicAttack : MonoBehaviour
 {
@@ -44,33 +45,7 @@ public class BasicAttack : MonoBehaviour
             currentTimeBetween -= energizingAttackModifier;
         }
         Vector3 mousePlayerVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Get the vector from player to mouse
-
-        if (Mathf.Abs(mousePlayerVector.x) > Mathf.Abs(mousePlayerVector.y)) // If mouse is more Left/Right than Up/Down
-        {
-            if (mousePlayerVector.x <= 0) // Right
-            {
-                if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
-                {
-                    Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
-                }
-                else
-                {
-                    Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
-                }
-            }
-            else // Left
-            {
-                if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
-                {
-                    Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
-                }
-                else
-                {
-                    Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
-                }
-            }
-        }
-        else // If mouse is more Up/Down than Left/Right
+        if (Input.GetAxisRaw("Vertical") > 0)
         {
             if (mousePlayerVector.y >= 0) // Up
             {
@@ -82,19 +57,39 @@ public class BasicAttack : MonoBehaviour
                 {
                     Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + yOffset), Quaternion.identity, gameObject.transform);
                 }
-                
             }
-            else // Down
+        }
+        else if (Input.GetAxisRaw("Vertical") < 0 && !gameObject.GetComponent<PlayerMovement>().IsGrounded())
+        {
+            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
             {
-                if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
-                {
-                    Debug.Log("Strechy");
-                    Instantiate(StretchyAttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - strechyYOffset), Quaternion.identity, gameObject.transform);
-                }
-                else
-                {
-                    Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - yOffset), Quaternion.identity, gameObject.transform);
-                }
+                Instantiate(StretchyAttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - strechyYOffset), Quaternion.identity, gameObject.transform);
+            }
+            else
+            {
+                Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - yOffset), Quaternion.identity, gameObject.transform);
+            }
+        }
+        else if (gameObject.GetComponent<PlayerMovement>().isFacingRight)
+        {
+            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+            {
+                Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
+            }
+            else
+            {
+                Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
+            }
+        }
+        else
+        {
+            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+            {
+                Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
+            }
+            else
+            {
+                Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
         }
     }
