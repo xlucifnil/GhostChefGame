@@ -347,3 +347,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05c28a4fc2c9cf408ed7257d6390cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  attack: 0
+  startWait: 2
+  leapLag: 1
+  landLag: 1
+  armbarLag: 1
+  berateLag: 1
+  berateBullets:
+  - {fileID: 8374160344036098342, guid: 3135301f9bfa4384bbae63b738e15f18, type: 3}
+  berateFireRate: 1
+  berateYOffset: 2.5
+  numBerateAttacks: 3

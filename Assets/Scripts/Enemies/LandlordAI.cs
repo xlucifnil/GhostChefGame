@@ -19,6 +19,7 @@ public class LandlordAI : MonoBehaviour
         NumAttacks
     }
 
+    GameObject player;
     public States state = States.Wait;
     public Attacks attack;
     Attacks previousAttack;
@@ -28,11 +29,25 @@ public class LandlordAI : MonoBehaviour
     public float landLag = 1.0f;
     public float armbarLag = 1.0f;
     public float berateLag = 1.0f;
+    public GameObject[] berateBullets;
+    public float berateFireRate = 1f;
+    float berateFireTimer = 0f;
+    public float berateYOffset = 1.0f;
+    public int numBerateAttacks = 3;
+    int berateAttacksMade;
+    public float armbarStartup = 1.0f;
+    float armbarStartTimer;
+    public float armbarDistance = 10f;
+    public float armbarSpeed;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         lagTime = startWait;
+        armbarStartTimer = armbarStartup;
+        berateFireTimer = berateFireRate;
     }
 
     // Update is called once per frame
@@ -72,15 +87,31 @@ public class LandlordAI : MonoBehaviour
                     break;
 
                     case Attacks.Armbar:
+                        
+                        
 
                         lagTime = armbarLag;
-                        state= States.Wait;
+                        state = States.Wait;
                     break;
 
                     case Attacks.Berate:
 
-                        lagTime = berateLag;
-                        state = States.Wait;
+                        berateFireTimer -= Time.deltaTime;
+
+                        if(berateFireTimer <= 0.0f)
+                        {
+                            GameObject BerateBullet = Instantiate(berateBullets[Random.Range(0, berateBullets.Length)]);
+                            BerateBullet.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + berateYOffset);
+                            berateFireTimer = berateFireRate;
+                            berateAttacksMade++;
+                        }
+
+                        if (berateAttacksMade >= numBerateAttacks)
+                        {
+                            lagTime = berateLag;
+                            berateAttacksMade = 0;
+                            state = States.Wait;
+                        }
                     break;
                 }
 
