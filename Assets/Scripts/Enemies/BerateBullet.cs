@@ -28,6 +28,7 @@ public class BerateBullet : MonoBehaviour
             fired = true;
 
             Vector2 direction = player.transform.position - gameObject.transform.position;
+            direction.Normalize();
             gameObject.GetComponent<Rigidbody2D>().velocity = speed * direction;
         }
     }
