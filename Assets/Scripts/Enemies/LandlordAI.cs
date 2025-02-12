@@ -37,9 +37,11 @@ public class LandlordAI : MonoBehaviour
     int berateAttacksMade;
     public float armbarStartup = 1.0f;
     float armbarStartTimer;
-    public float armbarDistance = 10f;
+    public float armbarDuration = 2f;
+    float armbarTimer;
     public float armbarSpeed;
-    
+    bool armbarStarted = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,7 @@ public class LandlordAI : MonoBehaviour
         lagTime = startWait;
         armbarStartTimer = armbarStartup;
         berateFireTimer = berateFireRate;
+        armbarTimer = armbarDuration;
     }
 
     // Update is called once per frame
@@ -87,11 +90,35 @@ public class LandlordAI : MonoBehaviour
                     break;
 
                     case Attacks.Armbar:
-                        
-                        
 
-                        lagTime = armbarLag;
-                        state = States.Wait;
+                        armbarStartTimer -= Time.deltaTime;
+                        if (armbarStartTimer <= 0)
+                        {
+                            if (!armbarStarted)
+                            {
+                                if (player.transform.position.x > gameObject.transform.position.x)
+                                {
+                                    gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * armbarSpeed;
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.left * armbarSpeed;
+                                }
+                                armbarStarted = true;
+                            }
+
+                            armbarTimer -= Time.deltaTime;
+
+                            if (armbarTimer <= 0.0f)
+                            {
+                                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                                lagTime = armbarLag;
+                                state = States.Wait;
+                                armbarStarted = false;
+                                armbarTimer = armbarDuration;
+                                armbarStartTimer = armbarStartup;
+                            }
+                        }
                     break;
 
                     case Attacks.Berate:
