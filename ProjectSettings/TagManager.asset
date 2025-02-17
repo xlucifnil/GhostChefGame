@@ -16,6 +16,7 @@ TagManager:
   - PlayerAttack
   - EnemyAttack
   - Mole
+  - Ground
   layers:
   - Default
   - TransparentFX

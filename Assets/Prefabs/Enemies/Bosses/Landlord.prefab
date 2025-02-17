@@ -359,3 +359,9 @@ MonoBehaviour:
   berateFireRate: 1
   berateYOffset: 2.5
   numBerateAttacks: 3
+  armbarStartup: 1
+  armbarDuration: 1
+  armbarSpeed: 20
+  leapPower: 0
+  leapAirTime: 0.5
+  leapWave: {fileID: 0}

@@ -41,6 +41,16 @@ public class LandlordAI : MonoBehaviour
     float armbarTimer;
     public float armbarSpeed;
     bool armbarStarted = false;
+    public bool landed = false;
+    public float leapStartLag = 0.5f;
+    float leapStartTimer;
+    public float leapPower;
+    public float leapDistanceModifier;
+    public GameObject leapWave;
+    public float waveXOffset;
+    public float waveYOffset;
+    public float waveSpeed;
+    bool leaped;
 
 
     // Start is called before the first frame update
@@ -51,6 +61,7 @@ public class LandlordAI : MonoBehaviour
         armbarStartTimer = armbarStartup;
         berateFireTimer = berateFireRate;
         armbarTimer = armbarDuration;
+        leapStartTimer = leapStartLag;
     }
 
     // Update is called once per frame
@@ -84,9 +95,45 @@ public class LandlordAI : MonoBehaviour
                     break;
 
                     case Attacks.Leap:
+                        leapStartTimer -= Time.deltaTime;
 
-                        lagTime = leapLag;
-                        state = States.Wait;
+
+                        if (leapStartTimer <= 0.0f)
+                        {
+                            if (landed && leaped)
+                            {
+                                leaped = false;
+                                landed = false;
+                                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                                GameObject rightWave = Instantiate(leapWave);
+                                GameObject leftWave = Instantiate(leapWave);
+                                rightWave.transform.position = new Vector2(gameObject.transform.position.x + waveXOffset, gameObject.transform.position.y + waveYOffset);
+                                leftWave.transform.position = new Vector2(gameObject.transform.position.x - waveXOffset, gameObject.transform.position.y + waveYOffset);
+                                rightWave.GetComponent<LeapWave>().Launch(waveSpeed);
+                                leftWave.GetComponent<LeapWave>().Launch(-waveSpeed);
+                                leapStartTimer = leapStartLag;
+                                lagTime = leapLag;
+                                state = States.Wait;
+                            }
+                            else if (leapStartTimer <= 0 && !leaped)
+                            {
+                                float leapDistance = Vector2.Distance(gameObject.transform.position, player.transform.position);
+                                if (player.transform.position.x <= gameObject.transform.position.x)
+                                {
+                                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-leapDistance * leapDistanceModifier, leapPower);
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(leapDistance * leapDistanceModifier, leapPower);
+                                }
+
+                                landed = false;
+                                leaped = true;
+                            }
+                        }
+                        
+                        
+                        
                     break;
 
                     case Attacks.Armbar:
@@ -143,6 +190,15 @@ public class LandlordAI : MonoBehaviour
                 }
 
             break;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if(collision.gameObject.tag == "Ground" && leaped)
+        {
+            landed = true;
         }
     }
 }
