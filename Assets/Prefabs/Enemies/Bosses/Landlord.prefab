@@ -154,10 +154,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3622984494995067415}
   - component: {fileID: 7022857402897455608}
-  - component: {fileID: 7947462199896835191}
-  - component: {fileID: 4181618931047998947}
   - component: {fileID: 982076447840154924}
   - component: {fileID: 971354297928632551}
+  - component: {fileID: 7947462199896835191}
+  - component: {fileID: 4181618931047998947}
   - component: {fileID: 7096475403052553457}
   m_Layer: 8
   m_Name: Landlord
@@ -234,35 +234,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7947462199896835191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825327892660601509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9705c3e1e89b13448982a0315a3b220e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 15
-  maxHealth: 15
-  defense: 0
-  basicHitBox: 1
---- !u!114 &4181618931047998947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825327892660601509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be98429b342821b4892b8f60f646ddb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!50 &982076447840154924
 Rigidbody2D:
   serializedVersion: 4
@@ -278,7 +249,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -335,6 +306,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7947462199896835191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825327892660601509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9705c3e1e89b13448982a0315a3b220e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  maxHealth: 15
+  defense: 0
+  basicHitBox: 1
+--- !u!114 &4181618931047998947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825327892660601509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be98429b342821b4892b8f60f646ddb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!114 &7096475403052553457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,9 +350,6 @@ MonoBehaviour:
   state: 0
   attack: 0
   startWait: 2
-  leapLag: 1
-  landLag: 1
-  armbarLag: 1
   berateLag: 1
   berateBullets:
   - {fileID: 8374160344036098342, guid: 3135301f9bfa4384bbae63b738e15f18, type: 3}
@@ -360,8 +357,19 @@ MonoBehaviour:
   berateYOffset: 2.5
   numBerateAttacks: 3
   armbarStartup: 1
+  armbarLag: 1
   armbarDuration: 1
   armbarSpeed: 20
-  leapPower: 0
-  leapAirTime: 0.5
-  leapWave: {fileID: 0}
+  landed: 0
+  leapStartLag: 0.5
+  leapLag: 1
+  leapPower: 28
+  leapDistanceModifier: 0.7
+  leapWave: {fileID: 232505602742389460, guid: 8f19d2f198e7ac04d9c2fa2a510938e5, type: 3}
+  waveXOffset: 1
+  waveYOffset: -0.5
+  waveSpeed: 10
+  landLag: 1
+  landSpawnPoint: {fileID: 0}
+  landPatterns: []
+  landRiseSpeed: 0

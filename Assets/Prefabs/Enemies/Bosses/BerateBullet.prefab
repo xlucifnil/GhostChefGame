@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireDelay: 0.5
   speed: 25
+  lifeSpan: 5
 --- !u!50 &5554442589836128799
 Rigidbody2D:
   serializedVersion: 4

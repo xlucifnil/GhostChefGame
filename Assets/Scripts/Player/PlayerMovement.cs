@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask calledGroundLayer;
 
     private void Start()
     {
@@ -148,7 +149,15 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        bool floored = false;
+        floored =  Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        if (floored)
+        {
+            return floored;
+        }
+
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, calledGroundLayer);
     }
 
     private void Flip()

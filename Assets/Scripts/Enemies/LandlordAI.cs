@@ -25,9 +25,6 @@ public class LandlordAI : MonoBehaviour
     Attacks previousAttack;
     float lagTime = 0.0f;
     public float startWait = 2.0f;
-    public float leapLag = 1.0f;
-    public float landLag = 1.0f;
-    public float armbarLag = 1.0f;
     public float berateLag = 1.0f;
     public GameObject[] berateBullets;
     public float berateFireRate = 1f;
@@ -37,12 +34,14 @@ public class LandlordAI : MonoBehaviour
     int berateAttacksMade;
     public float armbarStartup = 1.0f;
     float armbarStartTimer;
+    public float armbarLag = 1.0f;
     public float armbarDuration = 2f;
     float armbarTimer;
     public float armbarSpeed;
     bool armbarStarted = false;
     public bool landed = false;
     public float leapStartLag = 0.5f;
+    public float leapLag = 1.0f;
     float leapStartTimer;
     public float leapPower;
     public float leapDistanceModifier;
@@ -51,13 +50,19 @@ public class LandlordAI : MonoBehaviour
     public float waveYOffset;
     public float waveSpeed;
     bool leaped;
-
+    public float landSpawnLag = 1.0f;
+    float landSpawnTimer;
+    public float landLag = 1.0f;
+    public GameObject landSpawnPoint;
+    public GameObject[] landPatterns;
+    public float landRiseSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         lagTime = startWait;
+        landSpawnTimer = landSpawnLag;
         armbarStartTimer = armbarStartup;
         berateFireTimer = berateFireRate;
         armbarTimer = armbarDuration;
@@ -89,9 +94,15 @@ public class LandlordAI : MonoBehaviour
                 switch(attack)
                 {
                     case Attacks.LandCall:
-
-                        lagTime = landLag;
-                        state = States.Wait;
+                        landSpawnTimer -= Time.deltaTime;
+                        if (landSpawnTimer <= 0.0f)
+                        {
+                            GameObject land = Instantiate(landPatterns[Random.Range(0, landPatterns.Length)]);
+                            land.transform.position = landSpawnPoint.transform.position;
+                            landSpawnTimer = landSpawnLag;
+                            lagTime = landLag;
+                            state = States.Wait;
+                        }
                     break;
 
                     case Attacks.Leap:

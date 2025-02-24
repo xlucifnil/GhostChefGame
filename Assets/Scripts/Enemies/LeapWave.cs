@@ -11,7 +11,7 @@ public class LeapWave : MonoBehaviour
         lifeSpan -= Time.deltaTime;
         if (lifeSpan <= 0 )
         {
-            Destroy( this );
+            Destroy(gameObject);
         }
     }
     public void Launch(float speed)

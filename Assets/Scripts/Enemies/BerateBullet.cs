@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class BerateBullet : MonoBehaviour
     GameObject player;
     bool fire = false;
     bool fired = false;
+    public float lifeSpan = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,12 @@ public class BerateBullet : MonoBehaviour
             Vector2 direction = player.transform.position - gameObject.transform.position;
             direction.Normalize();
             gameObject.GetComponent<Rigidbody2D>().velocity = speed * direction;
+        }
+
+        lifeSpan -= Time.deltaTime;
+        if (lifeSpan <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
