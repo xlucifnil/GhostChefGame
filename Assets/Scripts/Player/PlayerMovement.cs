@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
-                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.LightSide)
+                if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.LightSide)
                 {
                     rb.gravityScale = lightHoverModifier;
                 }
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
                     rb.gravityScale = hoverModifier;
                 }
                 
-                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.Ectomash)
+                if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.Ectomash)
                 {
                     tillEctoTime -= Time.deltaTime;
                     if (tillEctoTime < 0 && !IsGrounded())
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.gravityScale = 4;
             }
 
-            if(IsGrounded() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Ectojello)
+            if(IsGrounded() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Ectojello)
             {
                 tillFloorEcto -= Time.deltaTime;
                 if(tillFloorEcto <= 0.0f)
@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float moveSpeed = speed;
 
-            if(player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Hyper)
+            if(player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Hyper)
             {
                 moveSpeed += hyperSpeedModifier;
             }

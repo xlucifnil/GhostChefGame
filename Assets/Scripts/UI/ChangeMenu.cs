@@ -16,17 +16,17 @@ public class ChangeMenu : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerInventory>().MakeRecipeList();
-        if(player.GetComponent<PlayerInventory>().Drink.foodImage != null)
-         drinkImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().Drink.foodImage;
+        if(player.GetComponent<PlayerInventory>().GetDrinkImage() != null)
+         drinkImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().GetDrinkImage();
 
-        if (player.GetComponent<PlayerInventory>().Main.foodImage != null)
-            mainImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().Main.foodImage;
+        if (player.GetComponent<PlayerInventory>().GetMainImage() != null)
+            mainImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().GetMainImage();
 
-        if (player.GetComponent<PlayerInventory>().Side.foodImage != null)
-            sideImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().Side.foodImage;
+        if (player.GetComponent<PlayerInventory>().GetSideImage() != null)
+            sideImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().GetSideImage();
 
-        if (player.GetComponent<PlayerInventory>().Dessert.foodImage != null)
-            dessertImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().Dessert.foodImage;
+        if (player.GetComponent<PlayerInventory>().GetDessertImage() != null)
+            dessertImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().GetDessertImage();
     }
     public void SwitchMenu(GameObject openMenu)
     {

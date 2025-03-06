@@ -32,8 +32,8 @@ public class PlayerUI : MonoBehaviour
                 Destroy(hearts[i]);
             }
             hearts.Clear();
-            int currentHealth = player.GetComponent<PlayerStats>().health;
-            int maxHealth = player.GetComponent<PlayerStats>().maxHealth;
+            int currentHealth = player.GetComponent<PlayerStats>().GetCurrentHealth();
+            int maxHealth = player.GetComponent<PlayerStats>().GetMaxHealth();
 
             for (int i = 0; i < currentHealth / heartSegments; i++)
             {
@@ -62,7 +62,7 @@ public class PlayerUI : MonoBehaviour
     {
         if (player != null)
         {
-            energyBar.fillAmount = player.GetComponent<PlayerStats>().currentEnergy / player.GetComponent<PlayerStats>().maxEnergy;
+            energyBar.fillAmount = player.GetComponent<PlayerStats>().GetCurrentEnergy() / player.GetComponent<PlayerStats>().GetMaxEnergy();
         }
     }
 }

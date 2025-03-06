@@ -145,14 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ec697db977b0d42aefa612d1261ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
-  health: 6
-  defense: 0
   numSnacks: 3
   maxSnacks: 3
   snackHealing: 2
-  maxEnergy: 100
-  currentEnergy: 25
   invulnDuration: 1
   thinBrothInvulnBonus: 1
   refreshingSetTime: 5
@@ -411,6 +406,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  calledGroundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &5603505936226214988
 MonoBehaviour:
   m_ObjectHideFlags: 0

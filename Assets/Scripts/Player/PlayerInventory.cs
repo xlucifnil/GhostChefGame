@@ -41,10 +41,10 @@ public class PlayerInventory : MonoBehaviour
     public Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool> { };
 
     //Meal Slots
-    public FoodSlot Drink;
-    public FoodSlot Main;
-    public FoodSlot Side;
-    public FoodSlot Dessert;
+    public static FoodSlot Drink;
+    public static FoodSlot Main;
+    public static FoodSlot Side;
+    public static FoodSlot Dessert;
     //Recipes
     public Sprite nullFood;
     public bool empty;
@@ -67,12 +67,6 @@ public class PlayerInventory : MonoBehaviour
     //Upgrades
 
     //KeyItems
-
-    private void Start()
-    {
-        Side.name = RECIPE.Null;
-        Side.foodImage = nullFood;
-    }
 
     public void SwapDrink(RECIPE name, Sprite foodSprite)
     {
@@ -115,5 +109,45 @@ public class PlayerInventory : MonoBehaviour
         recipeList.Add(RECIPE.Ectojello, ectojello);
         recipeList.Add(RECIPE.Hyper, hyper);
         recipeList.Add(RECIPE.EmergencyCandy, emergencyCandy);
+    }
+
+    public RECIPE GetDrink()
+    {
+        return Drink.name;
+    }
+
+    public RECIPE GetSide()
+    {
+        return Side.name;
+    }
+
+    public RECIPE GetMain()
+    {
+        return Main.name;
+    }
+
+    public RECIPE GetDessert()
+    {
+        return Dessert.name;
+    }
+
+    public Sprite GetDrinkImage()
+    {
+        return Drink.foodImage;
+    }
+
+    public Sprite GetSideImage()
+    {
+        return Side.foodImage;
+    }
+
+    public Sprite GetMainImage()
+    {
+        return Main.foodImage;
+    }
+
+    public Sprite GetDessertImage()
+    {
+        return Dessert.foodImage;
     }
 }

@@ -40,7 +40,7 @@ public class BasicAttack : MonoBehaviour
     private void Attack()
     {
         currentTimeBetween = timeBetweenAttacks;
-        if(player.GetComponent<PlayerInventory>().Main.name == RECIPE.EnergizingDish)
+        if(player.GetComponent<PlayerInventory>().GetMain() == RECIPE.EnergizingDish)
         {
             currentTimeBetween -= energizingAttackModifier;
         }
@@ -49,7 +49,7 @@ public class BasicAttack : MonoBehaviour
         {
             if (mousePlayerVector.y >= 0) // Up
             {
-                if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+                if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
                 {
                     Instantiate(StretchyAttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + strechyYOffset), Quaternion.identity, gameObject.transform);
                 }
@@ -61,7 +61,7 @@ public class BasicAttack : MonoBehaviour
         }
         else if (Input.GetAxisRaw("Vertical") < 0 && !gameObject.GetComponent<PlayerMovement>().IsGrounded())
         {
-            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+            if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
             {
                 Instantiate(StretchyAttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - strechyYOffset), Quaternion.identity, gameObject.transform);
             }
@@ -72,7 +72,7 @@ public class BasicAttack : MonoBehaviour
         }
         else if (gameObject.GetComponent<PlayerMovement>().isFacingRight)
         {
-            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+            if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
             {
                 Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x + strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
@@ -83,7 +83,7 @@ public class BasicAttack : MonoBehaviour
         }
         else
         {
-            if (player.GetComponent<PlayerInventory>().Main.name == RECIPE.StrechyDish)
+            if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
             {
                 Instantiate(StretchyAttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - strechyXOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
