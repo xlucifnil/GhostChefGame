@@ -15,7 +15,6 @@ public class ChangeMenu : MonoBehaviour
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerInventory>().MakeRecipeList();
         if(player.GetComponent<PlayerInventory>().GetDrinkImage() != null)
          drinkImage.GetComponent<Image>().sprite = player.GetComponent<PlayerInventory>().GetDrinkImage();
 

@@ -38,7 +38,21 @@ public class PlayerInventory : MonoBehaviour
         public Sprite foodImage;
     }
 
-    public Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool> { };
+    public static Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool>()
+    {
+        {RECIPE.StingingBubbly, false },
+        {RECIPE.ThinBroth, false },
+        {RECIPE.Refreshing, false },
+        {RECIPE.Lucky, false},
+        {RECIPE.EnergizingDish, false },
+        {RECIPE.StrechyDish, false },
+        {RECIPE.Ectomash, false },
+        {RECIPE.LightSide, false },
+        {RECIPE.Toast, false },
+        {RECIPE.Ectojello, false },
+        {RECIPE.Hyper, false },
+        {RECIPE.EmergencyCandy, false }
+    };
 
     //Meal Slots
     public static FoodSlot Drink;
@@ -47,23 +61,18 @@ public class PlayerInventory : MonoBehaviour
     public static FoodSlot Dessert;
     //Recipes
     public Sprite nullFood;
-    public bool empty;
     //Drink
-    [Header("Drinks")]
-    public bool stingingBubbly;
-    public bool thinBroth, refreshing;
+    public static bool stingingBubbly;
+    public static bool thinBroth, refreshing;
     //Main
-    [Header("Mains")]
-    public bool lucky;
-    public bool energizingDish, strechyDish;
+    public static bool lucky;
+    public static bool energizingDish, strechyDish;
     //Side
-    [Header("Sides")]
-    public bool ectomash;
-    public bool lightSide, toast;
+    public static bool ectomash;
+    public static bool lightSide, toast;
     //Dessert
-    [Header("Desserts")]
-    public bool ectojello;
-    public bool hyper, emergencyCandy;
+    public static bool ectojello;
+    public static bool hyper, emergencyCandy;
     //Upgrades
 
     //KeyItems
@@ -92,23 +101,9 @@ public class PlayerInventory : MonoBehaviour
         Dessert.foodImage = foodSprite;
     }
 
-    public void MakeRecipeList()
+    public bool RecipeKnown(RECIPE recipe)
     {
-        recipeList.Clear();
-
-        recipeList.Add(RECIPE.Null, empty);
-        recipeList.Add(RECIPE.StingingBubbly, stingingBubbly);
-        recipeList.Add(RECIPE.ThinBroth, thinBroth);
-        recipeList.Add(RECIPE.Refreshing, refreshing);
-        recipeList.Add(RECIPE.Lucky, lucky);
-        recipeList.Add(RECIPE.EnergizingDish, energizingDish);
-        recipeList.Add(RECIPE.StrechyDish, strechyDish);
-        recipeList.Add(RECIPE.Ectomash, ectomash);
-        recipeList.Add(RECIPE.LightSide, lightSide);
-        recipeList.Add(RECIPE.Toast, toast);
-        recipeList.Add(RECIPE.Ectojello, ectojello);
-        recipeList.Add(RECIPE.Hyper, hyper);
-        recipeList.Add(RECIPE.EmergencyCandy, emergencyCandy);
+        return recipeList[recipe];
     }
 
     public RECIPE GetDrink()

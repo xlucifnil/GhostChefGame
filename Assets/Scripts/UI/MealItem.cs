@@ -14,7 +14,7 @@ public class MealItem : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        if(player.GetComponent<PlayerInventory>().recipeList[recipe] == false)
+        if(player.GetComponent<PlayerInventory>().RecipeKnown(recipe) == false)
         {
             gameObject.SetActive(false);
         }
