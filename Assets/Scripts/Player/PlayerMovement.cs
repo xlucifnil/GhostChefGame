@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ectoGlideTrail;
     public bool isFacingRight = true;
     private GameObject player;
+    bool hovering = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -43,10 +44,14 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal");
 
+            
+
             if (Input.GetButtonDown("Jump"))
             {
                 if (IsGrounded())
                 {
+
+                    rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                     tillEctoTime = 0;
                 }
@@ -54,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
+                hovering = true;
                 if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.LightSide)
                 {
                     rb.gravityScale = lightHoverModifier;
@@ -72,6 +78,10 @@ public class PlayerMovement : MonoBehaviour
                         Instantiate(ectoGlideTrail,gameObject.transform.position, gameObject.transform.rotation);
                     }
                 }
+            }
+            else
+            {
+                hovering = false;
             }
 
             if (Input.GetButtonUp("Jump"))
@@ -108,6 +118,9 @@ public class PlayerMovement : MonoBehaviour
                 snacking = false;
             }
 
+            
+            
+
             if (snacking)
             {
                 currentSnackTime -= Time.deltaTime;
@@ -118,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
                     currentSnackTime = snackTime;
                 }
             }
-
             Flip();
         }
     }
@@ -144,20 +156,32 @@ public class PlayerMovement : MonoBehaviour
             }
 
             rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+
+            if (IsGrounded())
+            {
+                rb.gravityScale = 0;
+            }
+            else
+            {
+                if(!hovering)
+                rb.gravityScale = 4;
+            }
+
+            
         }
     }
 
     public bool IsGrounded()
     {
         bool floored = false;
-        floored =  Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        floored =  Physics2D.OverlapCircle(groundCheck.position, 0.4f, groundLayer);
 
         if (floored)
         {
             return floored;
         }
 
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, calledGroundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.4f, calledGroundLayer);
     }
 
     private void Flip()
