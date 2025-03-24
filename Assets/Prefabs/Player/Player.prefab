@@ -169,19 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nullFood: {fileID: 0}
-  empty: 0
-  stingingBubbly: 0
-  thinBroth: 0
-  refreshing: 1
-  lucky: 0
-  energizingDish: 1
-  strechyDish: 0
-  ectomash: 0
-  lightSide: 1
-  toast: 0
-  ectojello: 0
-  hyper: 1
-  emergencyCandy: 0
 --- !u!1 &2251356563410438707
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +306,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7b1023b74e04f584e8e757be4ca5b616, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -401,6 +388,9 @@ MonoBehaviour:
   floorEctoOffset: -0.75
   ectoGlideTrail: {fileID: 4017046094776405849, guid: 49556f332eb164f429caee510b0e5566, type: 3}
   isFacingRight: 1
+  slopeRayXOffset: 0.45
+  slopeRayYOffset: -0.5
+  slopeGroundDistance: 0.4
   rb: {fileID: 6620358792034883293}
   groundCheck: {fileID: 3601806789100972963}
   groundLayer:
