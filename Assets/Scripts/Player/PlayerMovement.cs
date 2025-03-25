@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float horizontal;
+    public float horizontal = 0;
     public float speed = 8f;
     public float hyperSpeedModifier = 2f;
     public float emergencySpeedModifier = 2f;
@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public float slopeRayXOffset = 1.0f; //This is the offset needed to put the raycast at the edge of the player. Do not change unless player size changes.
     public float slopeRayYOffset = -.5f; //Do not change unless player size changes.
     public float slopeGroundDistance = .2f;
+    float lastHorizontal = 0;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -186,17 +187,30 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (horizontal > 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeGroundDistance && Input.GetButton("Jump") == false)
             {
-                rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
-                
+                rb.gravityScale = 4;
+                rb.velocity = new Vector2(horizontal * moveSpeed, -horizontal * moveSpeed);
             }
             else if (horizontal < 0 && LeftHit.distance > slopeGroundDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
             {
-                rb.velocity = new Vector2(horizontal * moveSpeed,  -Mathf.Abs(horizontal) * moveSpeed);
+                rb.gravityScale = 4;
+                rb.velocity = new Vector2(horizontal * moveSpeed, horizontal * moveSpeed);
+            }
+            else if (horizontal == 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeGroundDistance && Input.GetButton("Jump") == false)
+            {
+                rb.velocity = Vector2.zero;
+            }
+            else if (horizontal == 0 && LeftHit.distance > slopeGroundDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
+            {
+                rb.velocity = Vector2.zero;
             }
             else
             {
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
             }
+
+
+            
+            
         }
     }
 
