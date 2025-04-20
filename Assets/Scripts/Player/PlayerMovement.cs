@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public float slopeRayXOffset = 1.0f; //This is the offset needed to put the raycast at the edge of the player. Do not change unless player size changes.
     public float slopeRayYOffset = -.5f; //Do not change unless player size changes.
     public float slopeGroundDistance = .2f;
-    float lastHorizontal = 0;
+    public float slopeFarMaxDistance = 1.8f;
+    public float slopeFarMinDistance = 1.6f;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (IsGroundedRay())
+                if (IsGrounded())
                 {
                     rb.gravityScale = 4;
                     rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
@@ -161,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
 
 
             RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, 10, LayerMask.GetMask("Ground"));
-            
             RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, 10, LayerMask.GetMask("Ground"));
 
             if(IsGrounded())
@@ -181,20 +182,40 @@ public class PlayerMovement : MonoBehaviour
                 rb.gravityScale = 4;
             }
 
-            if (IsGrounded())
+            if(IsGrounded())
             {
+                rb.gravityScale = 4;
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
             }
-            else if (horizontal > 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeGroundDistance && Input.GetButton("Jump") == false)
+            //Downhill to the right.
+            else if (horizontal > 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
             {
+                Debug.Log("Downhill Right");
                 rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, -horizontal * moveSpeed);
+                rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
             }
-            else if (horizontal < 0 && LeftHit.distance > slopeGroundDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
+            //Uphill to the right. updated
+            else if (horizontal > 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
             {
+                Debug.Log("Uphill Right");
                 rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, horizontal * moveSpeed);
+                rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
             }
+            //Downhill to the left. updated
+            else if (horizontal < 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
+            {
+                Debug.Log("Downhill Left");
+                rb.gravityScale = 4;
+                rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
+            }
+            //Uphill to the left
+            else if (horizontal < 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
+            {
+                Debug.Log("Uphill Left");
+                rb.gravityScale = 4;
+                rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
+            }
+            //Stopping on a hill
             else if (horizontal == 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeGroundDistance && Input.GetButton("Jump") == false)
             {
                 rb.velocity = Vector2.zero;
@@ -207,24 +228,34 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
             }
-
-
-            
             
         }
     }
 
     public bool IsGrounded()
     {
-        bool floored = false;
-        floored =  Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+
+        RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+
+        bool floored = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if (floored)
         {
             return floored;
         }
+        //else if (LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
+        //{
+        //    floored = true;
+        //}
+        //else if (RightHit.distance < slopeGroundDistance && RightHit.collider != null)
+        //{
+        //    floored = true;
+        //}
 
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, calledGroundLayer);
+
+        return floored;
     }
 
     public bool IsGroundedRay()
