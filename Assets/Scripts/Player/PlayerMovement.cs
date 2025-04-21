@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (IsGrounded())
+                if (IsGroundedRay())
                 {
                     rb.gravityScale = 4;
                     rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.Ectomash)
                 {
                     tillEctoTime -= Time.deltaTime;
-                    if (tillEctoTime < 0 && !IsGrounded())
+                    if (tillEctoTime < 0 && !IsGroundedRay())
                     {
                         tillEctoTime = ectoTime;
                         Instantiate(ectoGlideTrail,gameObject.transform.position, gameObject.transform.rotation);
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.gravityScale = 4;
             }
 
-            if(IsGrounded() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Ectojello)
+            if(IsGroundedRay() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Ectojello)
             {
                 tillFloorEcto -= Time.deltaTime;
                 if(tillFloorEcto <= 0.0f)
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
+            if (IsGroundedRay() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
             {
                 snacking = true;
             }
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
                 currentSnackTime = snackTime;
                 snacking = false;
             }
-            else if (!IsGrounded())
+            else if (!IsGroundedRay())
             {
                 currentSnackTime = snackTime;
                 snacking = false;
@@ -167,13 +167,13 @@ public class PlayerMovement : MonoBehaviour
 
             if(IsGrounded())
             {
-                rb.gravityScale = 0;
+                rb.gravityScale = 4;
             }
             else if(LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
             {
                 rb.gravityScale = 0;
             }
-            else if (RightHit.distance < slopeGroundDistance & RightHit.collider != null)
+            else if (RightHit.distance < slopeGroundDistance && RightHit.collider != null)
             {
                 rb.gravityScale = 0; 
             }
@@ -190,28 +190,24 @@ public class PlayerMovement : MonoBehaviour
             //Downhill to the right.
             else if (horizontal > 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
             {
-                Debug.Log("Downhill Right");
                 rb.gravityScale = 4;
                 rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
             }
             //Uphill to the right. updated
             else if (horizontal > 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
             {
-                Debug.Log("Uphill Right");
                 rb.gravityScale = 4;
                 rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
             }
             //Downhill to the left. updated
             else if (horizontal < 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
             {
-                Debug.Log("Downhill Left");
                 rb.gravityScale = 4;
                 rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
             }
             //Uphill to the left
             else if (horizontal < 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
-            {
-                Debug.Log("Uphill Left");
+            {;
                 rb.gravityScale = 4;
                 rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
             }
@@ -226,6 +222,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                if(!hovering)
+                {
+                    rb.gravityScale = 4;
+                }
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
             }
             
@@ -234,26 +234,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-
-        RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
-
-        RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
-
         bool floored = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if (floored)
         {
             return floored;
         }
-        //else if (LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
-        //{
-        //    floored = true;
-        //}
-        //else if (RightHit.distance < slopeGroundDistance && RightHit.collider != null)
-        //{
-        //    floored = true;
-        //}
-
 
         return floored;
     }
@@ -266,7 +252,14 @@ public class PlayerMovement : MonoBehaviour
 
         bool floored = false;
 
-        if(LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
+        floored = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        if (floored)
+        {
+            return floored;
+        }
+
+        if (LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
         {
             floored = true;
         }
