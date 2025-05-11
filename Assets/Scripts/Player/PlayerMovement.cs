@@ -27,10 +27,10 @@ public class PlayerMovement : MonoBehaviour
     private GameObject player;
     bool hovering = false;
     public float slopeRayXOffset = 1.0f; //This is the offset needed to put the raycast at the edge of the player. Do not change unless player size changes.
-    public float slopeRayYOffset = -.5f; //Do not change unless player size changes.
+    //public float slopeRayYOffset = -.5f; //Do not change unless player size changes.
     public float slopeGroundDistance = .2f;
-    public float slopeFarMaxDistance = 1.8f;
-    public float slopeFarMinDistance = 1.6f;
+    public float floatHeight = .2f;
+    bool jumping = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -50,12 +50,11 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal");
 
-            
-
             if (Input.GetButtonDown("Jump"))
             {
                 if (IsGroundedRay())
                 {
+                    jumping = true;
                     rb.gravityScale = 4;
                     rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
@@ -123,10 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 currentSnackTime = snackTime;
                 snacking = false;
             }
-
             
-            
-
             if (snacking)
             {
                 currentSnackTime -= Time.deltaTime;
@@ -161,74 +157,49 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed += emergencySpeedModifier;
             }
 
+            RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+            RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
 
-            RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, 10, LayerMask.GetMask("Ground"));
-            RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, 10, LayerMask.GetMask("Ground"));
+            Debug.Log(RightHit.distance);
 
-            if(IsGrounded())
-            {
-                rb.gravityScale = 4;
-            }
-            else if(LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
+            if (IsGroundedRay())
             {
                 rb.gravityScale = 0;
             }
-            else if (RightHit.distance < slopeGroundDistance && RightHit.collider != null)
-            {
-                rb.gravityScale = 0; 
-            }
-            else if(hovering == false)
+            else if (hovering == false)
             {
                 rb.gravityScale = 4;
             }
-
-            if(IsGrounded())
+            
+            if (IsGroundedRay() && jumping == false)
             {
-                rb.gravityScale = 4;
+                if (RightHit.point.y > LeftHit.point.y && RightHit.rigidbody != null)
+                {
+                    gameObject.transform.position = new Vector2(gameObject.transform.position.x, RightHit.point.y + floatHeight);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(gameObject.transform.position.x, LeftHit.point.y + floatHeight);
+                }
+                rb.gravityScale = 0;
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-            }
-            //Downhill to the right.
-            else if (horizontal > 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
-            {
-                rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
-            }
-            //Uphill to the right. updated
-            else if (horizontal > 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
-            {
-                rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
-            }
-            //Downhill to the left. updated
-            else if (horizontal < 0 && LeftHit.distance > slopeFarMinDistance && LeftHit.distance < slopeFarMaxDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
-            {
-                rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, -Mathf.Abs(horizontal) * moveSpeed);
-            }
-            //Uphill to the left
-            else if (horizontal < 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeFarMinDistance && RightHit.distance < slopeFarMaxDistance && Input.GetButton("Jump") == false)
-            {;
-                rb.gravityScale = 4;
-                rb.velocity = new Vector2(horizontal * moveSpeed, Mathf.Abs(horizontal) * moveSpeed);
-            }
-            //Stopping on a hill
-            else if (horizontal == 0 && LeftHit.distance < slopeGroundDistance && RightHit.distance > slopeGroundDistance && Input.GetButton("Jump") == false)
-            {
-                rb.velocity = Vector2.zero;
-            }
-            else if (horizontal == 0 && LeftHit.distance > slopeGroundDistance && RightHit.distance < slopeGroundDistance && Input.GetButton("Jump") == false)
-            {
-                rb.velocity = Vector2.zero;
             }
             else
             {
-                if(!hovering)
+                if (!hovering)
                 {
                     rb.gravityScale = 4;
                 }
                 rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
             }
-            
+
+            if(jumping == true)
+            {
+                if(rb.velocity.y < 0)
+                {
+                    jumping = false;
+                }
+            }
         }
     }
 
@@ -246,13 +217,11 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGroundedRay()
     {
-        RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+        RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
 
-        RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y + slopeRayYOffset), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+        RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
 
         bool floored = false;
-
-        floored = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if (floored)
         {

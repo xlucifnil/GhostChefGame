@@ -3377,8 +3377,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: slopeCatch
       value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
+      propertyPath: floatHeight
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: hoverDistance
@@ -3394,15 +3402,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: slopeFarMaxDistance
-      value: 1.28
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: slopeFarMinDistance
-      value: 1.26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: slopeGroundDistance
-      value: 0.38
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 8015163158133218848, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_Name
