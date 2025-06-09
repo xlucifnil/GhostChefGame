@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public float floatHeight = .2f;
     bool jumping = false;
 
+    public Animator animator;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         currentSnackTime = snackTime;
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -55,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
                 if (IsGroundedRay())
                 {
                     jumping = true;
+                    animator.SetBool("isJumping", jumping);
                     rb.gravityScale = 4;
                     rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
@@ -160,8 +164,6 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
             RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
 
-            Debug.Log(RightHit.distance);
-
             if (IsGroundedRay())
             {
                 rb.gravityScale = 0;
@@ -173,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
             
             if (IsGroundedRay() && jumping == false)
             {
+                animator.SetBool("isJumping", jumping);
                 if (RightHit.point.y > LeftHit.point.y && RightHit.rigidbody != null)
                 {
                     gameObject.transform.position = new Vector2(gameObject.transform.position.x, RightHit.point.y + floatHeight);
@@ -200,6 +203,8 @@ public class PlayerMovement : MonoBehaviour
                     jumping = false;
                 }
             }
+            animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+            animator.SetFloat("yVelocity", rb.velocity.y);
         }
     }
 

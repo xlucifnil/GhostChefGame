@@ -31,14 +31,20 @@ public class BasicAttack : MonoBehaviour
         {
             if (currentTimeBetween <= 0)
             {
+
+                gameObject.GetComponent<PlayerMovement>().animator.SetBool("Attacking", false);
                 if (Input.GetMouseButtonDown(0))
+                {
                     Attack();
+                }
             }
         }
     }
 
-    private void Attack()
-    {
+    private void Attack()  {
+        gameObject.GetComponent<PlayerMovement>().animator.SetFloat("xTargeting", Input.GetAxisRaw("Horizontal"));
+        gameObject.GetComponent<PlayerMovement>().animator.SetFloat("yTargeting", Input.GetAxisRaw("Vertical"));
+        gameObject.GetComponent<PlayerMovement>().animator.SetBool("Attacking", true);
         currentTimeBetween = timeBetweenAttacks;
         if(player.GetComponent<PlayerInventory>().GetMain() == RECIPE.EnergizingDish)
         {
@@ -47,8 +53,6 @@ public class BasicAttack : MonoBehaviour
         Vector3 mousePlayerVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Get the vector from player to mouse
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            if (mousePlayerVector.y >= 0) // Up
-            {
                 if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
                 {
                     Instantiate(StretchyAttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + strechyYOffset), Quaternion.identity, gameObject.transform);
@@ -57,9 +61,8 @@ public class BasicAttack : MonoBehaviour
                 {
                     Instantiate(AttackHitBoxVertical, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + yOffset), Quaternion.identity, gameObject.transform);
                 }
-            }
         }
-        else if (Input.GetAxisRaw("Vertical") < 0 && !gameObject.GetComponent<PlayerMovement>().IsGrounded())
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
             if (player.GetComponent<PlayerInventory>().GetMain() == RECIPE.StrechyDish)
             {
