@@ -29,6 +29,12 @@ public enum RECIPE
     EmergencyCandy
 }
 
+public enum ITEM
+{
+    Heart1, Heart2, Heart3, Heart4, Heart5, Heart6, Heart7,
+    Float
+}
+
 public class PlayerInventory : MonoBehaviour
 {
     public struct FoodSlot
@@ -73,9 +79,29 @@ public class PlayerInventory : MonoBehaviour
     //Dessert
     public static bool ectojello;
     public static bool hyper, emergencyCandy;
-    //Upgrades
+    //Upgrades and Items. Things not needed to be interacted with by the player in a menu.
 
-    //KeyItems
+    public static Dictionary<ITEM, bool> inventory = new Dictionary<ITEM, bool>()
+    {
+        {ITEM.Heart1, false },
+        {ITEM.Heart2, false },
+        {ITEM.Heart3, false },
+        {ITEM.Heart4, false },
+        {ITEM.Heart5, false },
+        {ITEM.Heart6, false },
+        {ITEM.Heart7, false },
+        {ITEM.Float, false },
+    };
+
+    public void AddRecipeToInventory(RECIPE recipe)
+    {
+        recipeList[recipe] = true;
+    }
+
+    public void AddItemToInventory(ITEM item)
+    {
+        inventory[item] = true;
+    }
 
     public void SwapDrink(RECIPE name, Sprite foodSprite)
     {
