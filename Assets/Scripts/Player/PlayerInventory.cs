@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 
 public enum MEALTYPE
@@ -105,26 +106,38 @@ public class PlayerInventory : MonoBehaviour
 
     public void SwapDrink(RECIPE name, Sprite foodSprite)
     {
-        Drink.name = name;
-        Drink.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Drink.name = name;
+            Drink.foodImage = foodSprite;
+        }
     }
 
     public void SwapMain(RECIPE name, Sprite foodSprite)
     {
-        Main.name = name;
-        Main.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Main.name = name;
+            Main.foodImage = foodSprite;
+        }
     }
 
     public void SwapSide(RECIPE name, Sprite foodSprite)
     {
-        Side.name = name;
-        Side.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Side.name = name;
+            Side.foodImage = foodSprite;
+        }
     }
 
     public void SwapDessert(RECIPE name, Sprite foodSprite)
     {
-        Dessert.name = name;
-        Dessert.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Dessert.name = name;
+            Dessert.foodImage = foodSprite;
+        }
     }
 
     public bool RecipeKnown(RECIPE recipe)

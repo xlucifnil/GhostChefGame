@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float slopeGroundDistance = .2f;
     public float floatHeight = .2f;
     bool jumping = false;
+    public bool camping = false;
 
     public Animator animator;
 
@@ -132,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
                 currentSnackTime -= Time.deltaTime;
                 if (currentSnackTime <= 0)
                 {
-                    gameObject.GetComponent<PlayerStats>().EatSnack();
+                    player.GetComponent<PlayerStats>().EatSnack();
                     snacking = false;
                     currentSnackTime = snackTime;
                 }
@@ -259,5 +260,21 @@ public class PlayerMovement : MonoBehaviour
     public void TurnOnEmergencySpeed()
     {
         emergencyTimeLeft = emergencySpeedDuration;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(Input.GetAxisRaw("Vertical") >= 0.5f && camping == false)
+        {
+            camping = true;
+            transform.position = new Vector2 (collision.GetComponent<CampingSpot>().playerSpot.transform.position.x, transform.position.y);
+            Debug.Log("camp");
+        }
+
+        if(Math.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f && camping == true)
+        {
+            camping = false;
+            Debug.Log("unCamp");
+        }
     }
 }

@@ -144,19 +144,31 @@ public class PlayerStats : MonoBehaviour
         playerUI.GetComponent<PlayerUI>().DisplayEnergy();
     }
 
+    public void FullRestore()
+    {
+        health = maxHealth;
+        playerUI.GetComponent<PlayerUI>().DisplayHealth();
+        currentEnergy = maxEnergy;
+        playerUI.GetComponent<PlayerUI>().DisplayEnergy();
+        numSnacks = maxSnacks;
+        playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
+    }
+
     public int GetMaxHealth()
     {
         return maxHealth;
     }
+
     public int GetCurrentHealth()
     {
         return health;
     }
-
+    
     public float GetCurrentEnergy()
     {
         return currentEnergy;
     }
+    
     public float GetMaxEnergy()
     {
         return maxEnergy;
