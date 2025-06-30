@@ -5,8 +5,9 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public bool addRecipe = false;
-    public bool addItem = false;
     public RECIPE recipe;
+    public bool addItem = false;
+    public ITEM item;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
