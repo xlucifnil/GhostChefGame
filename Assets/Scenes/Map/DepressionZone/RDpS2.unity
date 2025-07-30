@@ -523,10 +523,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4764390174632152190, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
-      propertyPath: calledGroundLayer.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 8015163158133218848, guid: befddccba4528ba40b5b9375925c35ac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -956,6 +952,18 @@ PrefabInstance:
     - target: {fileID: 2825327892660601509, guid: 1c77009f3cea9734aa7a3a2c92b712a8, type: 3}
       propertyPath: m_Name
       value: Landlord
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622984494995067415, guid: 1c77009f3cea9734aa7a3a2c92b712a8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622984494995067415, guid: 1c77009f3cea9734aa7a3a2c92b712a8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622984494995067415, guid: 1c77009f3cea9734aa7a3a2c92b712a8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3622984494995067415, guid: 1c77009f3cea9734aa7a3a2c92b712a8, type: 3}
       propertyPath: m_LocalPosition.x

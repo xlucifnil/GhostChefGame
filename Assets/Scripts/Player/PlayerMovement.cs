@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float horizontal;
+    public float horizontal = 0;
     public float speed = 8f;
     public float hyperSpeedModifier = 2f;
     public float emergencySpeedModifier = 2f;
@@ -24,6 +25,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ectoGlideTrail;
     public bool isFacingRight = true;
     private GameObject player;
+    bool hovering = false;
+    public float slopeRayXOffset = 1.0f; //This is the offset needed to put the raycast at the edge of the player. Do not change unless player size changes.
+    //public float slopeRayYOffset = -.5f; //Do not change unless player size changes.
+    public float slopeGroundDistance = .2f;
+    public float floatHeight = .2f;
+    bool jumping = false;
+    public bool camping = false;
+
+    public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -32,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         currentSnackTime = snackTime;
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -45,8 +56,12 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (IsGrounded())
+                if (IsGroundedRay())
                 {
+                    jumping = true;
+                    animator.SetBool("isJumping", jumping);
+                    rb.gravityScale = 4;
+                    rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
                     rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                     tillEctoTime = 0;
                 }
@@ -54,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
             {
-                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.LightSide)
+                hovering = true;
+                if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.LightSide)
                 {
                     rb.gravityScale = lightHoverModifier;
                 }
@@ -63,15 +79,19 @@ public class PlayerMovement : MonoBehaviour
                     rb.gravityScale = hoverModifier;
                 }
                 
-                if(player.GetComponent<PlayerInventory>().Side.name == RECIPE.Ectomash)
+                if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.Ectomash)
                 {
                     tillEctoTime -= Time.deltaTime;
-                    if (tillEctoTime < 0 && !IsGrounded())
+                    if (tillEctoTime < 0 && !IsGroundedRay())
                     {
                         tillEctoTime = ectoTime;
                         Instantiate(ectoGlideTrail,gameObject.transform.position, gameObject.transform.rotation);
                     }
                 }
+            }
+            else
+            {
+                hovering = false;
             }
 
             if (Input.GetButtonUp("Jump"))
@@ -83,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.gravityScale = 4;
             }
 
-            if(IsGrounded() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Ectojello)
+            if(IsGroundedRay() && rb.velocity.x != 0.0f && player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Ectojello)
             {
                 tillFloorEcto -= Time.deltaTime;
                 if(tillFloorEcto <= 0.0f)
@@ -93,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
+            if (IsGroundedRay() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
             {
                 snacking = true;
             }
@@ -102,23 +122,22 @@ public class PlayerMovement : MonoBehaviour
                 currentSnackTime = snackTime;
                 snacking = false;
             }
-            else if (!IsGrounded())
+            else if (!IsGroundedRay())
             {
                 currentSnackTime = snackTime;
                 snacking = false;
             }
-
+            
             if (snacking)
             {
                 currentSnackTime -= Time.deltaTime;
                 if (currentSnackTime <= 0)
                 {
-                    gameObject.GetComponent<PlayerStats>().EatSnack();
+                    player.GetComponent<PlayerStats>().EatSnack();
                     snacking = false;
                     currentSnackTime = snackTime;
                 }
             }
-
             Flip();
         }
     }
@@ -129,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float moveSpeed = speed;
 
-            if(player.GetComponent<PlayerInventory>().Dessert.name == RECIPE.Hyper)
+            if(player.GetComponent<PlayerInventory>().GetDessert() == RECIPE.Hyper)
             {
                 moveSpeed += hyperSpeedModifier;
             }
@@ -143,21 +162,88 @@ public class PlayerMovement : MonoBehaviour
                 moveSpeed += emergencySpeedModifier;
             }
 
-            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+            RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+            RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+
+            if (IsGroundedRay())
+            {
+                rb.gravityScale = 0;
+            }
+            else if (hovering == false)
+            {
+                rb.gravityScale = 4;
+            }
+            
+            if (IsGroundedRay() && jumping == false)
+            {
+                animator.SetBool("isJumping", jumping);
+                if (RightHit.point.y > LeftHit.point.y && RightHit.rigidbody != null)
+                {
+                    gameObject.transform.position = new Vector2(gameObject.transform.position.x, RightHit.point.y + floatHeight);
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(gameObject.transform.position.x, LeftHit.point.y + floatHeight);
+                }
+                rb.gravityScale = 0;
+                rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+            }
+            else
+            {
+                if (!hovering)
+                {
+                    rb.gravityScale = 4;
+                }
+                rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+            }
+
+            if(jumping == true)
+            {
+                if(rb.velocity.y < 0)
+                {
+                    jumping = false;
+                }
+            }
+            animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+            animator.SetFloat("yVelocity", rb.velocity.y);
         }
     }
 
     public bool IsGrounded()
     {
-        bool floored = false;
-        floored =  Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        bool floored = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if (floored)
         {
             return floored;
         }
 
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, calledGroundLayer);
+        return floored;
+    }
+
+    public bool IsGroundedRay()
+    {
+        RaycastHit2D LeftHit = Physics2D.Raycast(new Vector2(transform.position.x - slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+
+        RaycastHit2D RightHit = Physics2D.Raycast(new Vector2(transform.position.x + slopeRayXOffset, transform.position.y), Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground"));
+
+        bool floored = false;
+
+        if (floored)
+        {
+            return floored;
+        }
+
+        if (LeftHit.distance < slopeGroundDistance && LeftHit.collider != null)
+        {
+            floored = true;
+        }
+        else if(RightHit.distance < slopeGroundDistance && RightHit.collider != null)
+        {
+            floored = true;
+        }
+
+        return floored;
     }
 
     private void Flip()
@@ -174,5 +260,21 @@ public class PlayerMovement : MonoBehaviour
     public void TurnOnEmergencySpeed()
     {
         emergencyTimeLeft = emergencySpeedDuration;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(Input.GetAxisRaw("Vertical") >= 0.5f && camping == false)
+        {
+            camping = true;
+            transform.position = new Vector2 (collision.GetComponent<CampingSpot>().playerSpot.transform.position.x, transform.position.y);
+            Debug.Log("camp");
+        }
+
+        if(Math.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f && camping == true)
+        {
+            camping = false;
+            Debug.Log("unCamp");
+        }
     }
 }

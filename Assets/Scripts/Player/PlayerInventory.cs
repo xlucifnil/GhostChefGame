@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 
 public enum MEALTYPE
@@ -29,6 +30,12 @@ public enum RECIPE
     EmergencyCandy
 }
 
+public enum ITEM
+{
+    Heart1, Heart2, Heart3, Heart4, Heart5, Heart6, Heart7,
+    Float
+}
+
 public class PlayerInventory : MonoBehaviour
 {
     public struct FoodSlot
@@ -38,82 +45,143 @@ public class PlayerInventory : MonoBehaviour
         public Sprite foodImage;
     }
 
-    public Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool> { };
+    public static Dictionary<RECIPE, bool> recipeList = new Dictionary<RECIPE, bool>()
+    {
+        {RECIPE.StingingBubbly, false },
+        {RECIPE.ThinBroth, false },
+        {RECIPE.Refreshing, false },
+        {RECIPE.Lucky, false},
+        {RECIPE.EnergizingDish, false },
+        {RECIPE.StrechyDish, false },
+        {RECIPE.Ectomash, false },
+        {RECIPE.LightSide, false },
+        {RECIPE.Toast, false },
+        {RECIPE.Ectojello, false },
+        {RECIPE.Hyper, false },
+        {RECIPE.EmergencyCandy, false }
+    };
 
     //Meal Slots
-    public FoodSlot Drink;
-    public FoodSlot Main;
-    public FoodSlot Side;
-    public FoodSlot Dessert;
+    public static FoodSlot Drink;
+    public static FoodSlot Main;
+    public static FoodSlot Side;
+    public static FoodSlot Dessert;
     //Recipes
     public Sprite nullFood;
-    public bool empty;
     //Drink
-    [Header("Drinks")]
-    public bool stingingBubbly;
-    public bool thinBroth, refreshing;
+    public static bool stingingBubbly;
+    public static bool thinBroth, refreshing;
     //Main
-    [Header("Mains")]
-    public bool lucky;
-    public bool energizingDish, strechyDish;
+    public static bool lucky;
+    public static bool energizingDish, strechyDish;
     //Side
-    [Header("Sides")]
-    public bool ectomash;
-    public bool lightSide, toast;
+    public static bool ectomash;
+    public static bool lightSide, toast;
     //Dessert
-    [Header("Desserts")]
-    public bool ectojello;
-    public bool hyper, emergencyCandy;
-    //Upgrades
+    public static bool ectojello;
+    public static bool hyper, emergencyCandy;
+    //Upgrades and Items. Things not needed to be interacted with by the player in a menu.
 
-    //KeyItems
-
-    private void Start()
+    public static Dictionary<ITEM, bool> inventory = new Dictionary<ITEM, bool>()
     {
-        Side.name = RECIPE.Null;
-        Side.foodImage = nullFood;
+        {ITEM.Heart1, false },
+        {ITEM.Heart2, false },
+        {ITEM.Heart3, false },
+        {ITEM.Heart4, false },
+        {ITEM.Heart5, false },
+        {ITEM.Heart6, false },
+        {ITEM.Heart7, false },
+        {ITEM.Float, false },
+    };
+
+    public void AddRecipeToInventory(RECIPE recipe)
+    {
+        recipeList[recipe] = true;
+    }
+
+    public void AddItemToInventory(ITEM item)
+    {
+        inventory[item] = true;
     }
 
     public void SwapDrink(RECIPE name, Sprite foodSprite)
     {
-        Drink.name = name;
-        Drink.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Drink.name = name;
+            Drink.foodImage = foodSprite;
+        }
     }
 
     public void SwapMain(RECIPE name, Sprite foodSprite)
     {
-        Main.name = name;
-        Main.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Main.name = name;
+            Main.foodImage = foodSprite;
+        }
     }
 
     public void SwapSide(RECIPE name, Sprite foodSprite)
     {
-        Side.name = name;
-        Side.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Side.name = name;
+            Side.foodImage = foodSprite;
+        }
     }
 
     public void SwapDessert(RECIPE name, Sprite foodSprite)
     {
-        Dessert.name = name;
-        Dessert.foodImage = foodSprite;
+        if (gameObject.transform.parent.GetComponent<PlayerMovement>().camping == true)
+        {
+            Dessert.name = name;
+            Dessert.foodImage = foodSprite;
+        }
     }
 
-    public void MakeRecipeList()
+    public bool RecipeKnown(RECIPE recipe)
     {
-        recipeList.Clear();
+        return recipeList[recipe];
+    }
 
-        recipeList.Add(RECIPE.Null, empty);
-        recipeList.Add(RECIPE.StingingBubbly, stingingBubbly);
-        recipeList.Add(RECIPE.ThinBroth, thinBroth);
-        recipeList.Add(RECIPE.Refreshing, refreshing);
-        recipeList.Add(RECIPE.Lucky, lucky);
-        recipeList.Add(RECIPE.EnergizingDish, energizingDish);
-        recipeList.Add(RECIPE.StrechyDish, strechyDish);
-        recipeList.Add(RECIPE.Ectomash, ectomash);
-        recipeList.Add(RECIPE.LightSide, lightSide);
-        recipeList.Add(RECIPE.Toast, toast);
-        recipeList.Add(RECIPE.Ectojello, ectojello);
-        recipeList.Add(RECIPE.Hyper, hyper);
-        recipeList.Add(RECIPE.EmergencyCandy, emergencyCandy);
+    public RECIPE GetDrink()
+    {
+        return Drink.name;
+    }
+
+    public RECIPE GetSide()
+    {
+        return Side.name;
+    }
+
+    public RECIPE GetMain()
+    {
+        return Main.name;
+    }
+
+    public RECIPE GetDessert()
+    {
+        return Dessert.name;
+    }
+
+    public Sprite GetDrinkImage()
+    {
+        return Drink.foodImage;
+    }
+
+    public Sprite GetSideImage()
+    {
+        return Side.foodImage;
+    }
+
+    public Sprite GetMainImage()
+    {
+        return Main.foodImage;
+    }
+
+    public Sprite GetDessertImage()
+    {
+        return Dessert.foodImage;
     }
 }

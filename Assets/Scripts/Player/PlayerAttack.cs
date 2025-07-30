@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(player.GetComponent<PlayerInventory>().Main.name == RECIPE.Lucky)
+        if(player.GetComponent<PlayerInventory>().GetMain() == RECIPE.Lucky)
         {
             damage = damage * 2;
         }

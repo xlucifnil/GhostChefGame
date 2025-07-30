@@ -14,7 +14,7 @@ public class MealItem : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        if(player.GetComponent<PlayerInventory>().recipeList[recipe] == false)
+        if(player.GetComponent<PlayerInventory>().RecipeKnown(recipe) == false)
         {
             gameObject.SetActive(false);
         }
@@ -30,25 +30,28 @@ public class MealItem : MonoBehaviour
 
     public void SelectMeal()
     {
-        mealSlot.GetComponent<Image>().sprite = gameObject.GetComponent<Image>().sprite;
-
-        switch(mealType)
+        if (player.transform.parent.GetComponent<PlayerMovement>().camping == true)
         {
-            case MEALTYPE.Drink:
-                player.GetComponent<PlayerInventory>().SwapDrink(recipe, gameObject.GetComponent<Image>().sprite);
-                break;
+            mealSlot.GetComponent<Image>().sprite = gameObject.GetComponent<Image>().sprite;
 
-            case MEALTYPE.Main:
-                player.GetComponent<PlayerInventory>().SwapMain(recipe, gameObject.GetComponent<Image>().sprite);
-                break;
+            switch (mealType)
+            {
+                case MEALTYPE.Drink:
+                    player.GetComponent<PlayerInventory>().SwapDrink(recipe, gameObject.GetComponent<Image>().sprite);
+                    break;
 
-            case MEALTYPE.Side:
-                player.GetComponent<PlayerInventory>().SwapSide(recipe, gameObject.GetComponent<Image>().sprite);
-                break;
+                case MEALTYPE.Main:
+                    player.GetComponent<PlayerInventory>().SwapMain(recipe, gameObject.GetComponent<Image>().sprite);
+                    break;
 
-            case MEALTYPE.Dessert:
-                player.GetComponent<PlayerInventory>().SwapDessert(recipe, gameObject.GetComponent<Image>().sprite);
-                break;
+                case MEALTYPE.Side:
+                    player.GetComponent<PlayerInventory>().SwapSide(recipe, gameObject.GetComponent<Image>().sprite);
+                    break;
+
+                case MEALTYPE.Dessert:
+                    player.GetComponent<PlayerInventory>().SwapDessert(recipe, gameObject.GetComponent<Image>().sprite);
+                    break;
+            }
         }
     }
 }

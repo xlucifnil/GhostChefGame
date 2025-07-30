@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public int maxHealth = 5;
-    public int health = 5;
-    public int defense = 0;
+    public static int maxHealth = 6;
+    public static int health = 6;
+    public static int defense = 0;
     public int numSnacks = 3;
     public int maxSnacks = 3;
     public int snackHealing = 2;
-    public float maxEnergy = 100;
-    public float currentEnergy = 50;
+    public static float maxEnergy = 100;
+    public static float currentEnergy = 50;
     public float invulnDuration = 1;
     public float thinBrothInvulnBonus = 1;
     public float refreshingSetTime = 5f;
@@ -47,7 +47,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        if(gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.Refreshing)
+        if(gameObject.GetComponent<PlayerInventory>().GetDrink() == RECIPE.Refreshing)
         {
             refreshingCurrentTime -= Time.deltaTime;
             if(refreshingCurrentTime <= 0)
@@ -72,15 +72,15 @@ public class PlayerStats : MonoBehaviour
             invulnTime = invulnDuration;
         }
         
-        if(gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.ThinBroth)
+        if(gameObject.GetComponent<PlayerInventory>().GetDrink() == RECIPE.ThinBroth)
         {
             invulnTime += thinBrothInvulnBonus;
         }
-        if (gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.StingingBubbly)
+        if (gameObject.GetComponent<PlayerInventory>().GetDrink() == RECIPE.StingingBubbly)
         {
             Instantiate(damageBurst, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
         }
-        if (gameObject.GetComponent<PlayerInventory>().Drink.name == RECIPE.EmergencyCandy)
+        if (gameObject.GetComponent<PlayerInventory>().GetDessert() == RECIPE.EmergencyCandy)
         {
             FindAnyObjectByType(typeof(PlayerMovement)).GetComponent<PlayerMovement>().TurnOnEmergencySpeed();
         }
@@ -142,5 +142,35 @@ public class PlayerStats : MonoBehaviour
     {
         currentEnergy -= spent;
         playerUI.GetComponent<PlayerUI>().DisplayEnergy();
+    }
+
+    public void FullRestore()
+    {
+        health = maxHealth;
+        playerUI.GetComponent<PlayerUI>().DisplayHealth();
+        currentEnergy = maxEnergy;
+        playerUI.GetComponent<PlayerUI>().DisplayEnergy();
+        numSnacks = maxSnacks;
+        playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return health;
+    }
+    
+    public float GetCurrentEnergy()
+    {
+        return currentEnergy;
+    }
+    
+    public float GetMaxEnergy()
+    {
+        return maxEnergy;
     }
 }
