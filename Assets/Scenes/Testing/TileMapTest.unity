@@ -3663,13 +3663,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundNPC
       objectReference: {fileID: 0}
+    - target: {fileID: 427026775453260485, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: fadeSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.16
+      value: 12.59
       objectReference: {fileID: 0}
     - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.25
+      value: -20.2
       objectReference: {fileID: 0}
     - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
       propertyPath: m_LocalPosition.z
