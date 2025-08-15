@@ -3663,9 +3663,89 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundNPC
       objectReference: {fileID: 0}
+    - target: {fileID: 119452605171169804, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119452605171169804, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 427026775453260485, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
       propertyPath: fadeSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.143
+      objectReference: {fileID: 0}
+    - target: {fileID: 441568846452918389, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772509477462256850, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772509477462256850, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c12ee545cc2d7bb4e900c972fc41a615, type: 3}
+    - target: {fileID: 2772509477462256850, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772509477462256850, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772509477462256850, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048983843481879847, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048983843481879847, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048983843481879847, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314183978431897795, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314183978431897795, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00004578
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6654384008892755828, guid: cbfbf4c595080154d957fd154d2e8ca4, type: 3}
       propertyPath: m_LocalPosition.x
