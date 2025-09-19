@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float floatHeight = .2f;
     bool jumping = false;
     public bool camping = false;
+    bool lockedMovment = false;
 
     public Animator animator;
 
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale != 0f)
+        if (Time.timeScale != 0f && !lockedMovment)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -144,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.timeScale != 0f)
+        if (Time.timeScale != 0f && !lockedMovment)
         {
             float moveSpeed = speed;
 
@@ -276,5 +277,14 @@ public class PlayerMovement : MonoBehaviour
             camping = false;
             Debug.Log("unCamp");
         }
+    }
+
+    public void LockMovement()
+    {
+        lockedMovment = true;
+    }
+    public void UnlockMovement()
+    {
+        lockedMovment = false;
     }
 }
