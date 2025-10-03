@@ -18,6 +18,7 @@ public class BasicAttack : MonoBehaviour
     float currentTimeBetween = 0;
     GameObject player;
     public GameObject testEffect;
+    bool attackLocked;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class BasicAttack : MonoBehaviour
     private void Update()
     {
         currentTimeBetween -= Time.deltaTime;
-        if (Time.timeScale != 0f)
+        if (Time.timeScale != 0f && !attackLocked)
         {
             if (currentTimeBetween <= 0)
             {
@@ -95,5 +96,15 @@ public class BasicAttack : MonoBehaviour
                 Instantiate(AttackHitBoxHorizontal, new Vector3(gameObject.transform.position.x - xOffset, gameObject.transform.position.y), Quaternion.identity, gameObject.transform);
             }
         }
+    }
+
+    public void LockAttack()
+    {
+        attackLocked = true;
+    }
+
+    public void UnlockAttack()
+    {
+        attackLocked = false;
     }
 }
