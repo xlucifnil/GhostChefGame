@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3601806789100972963}
@@ -43,7 +43,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814328226467920336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0015083253, y: -0.000000834465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.57466644, y: 0.86727035}
   m_EdgeRadius: 0
 --- !u!114 &4716980911431762316
 MonoBehaviour:
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 4764390174632152190}
   - component: {fileID: 5603505936226214988}
   - component: {fileID: 2834570298843331144}
+  - component: {fileID: 7952212023668273072}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -232,7 +233,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.11, y: -3.38, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2984442305824783696}
@@ -245,7 +246,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8015163158133218848}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -279,8 +280,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.81838536, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 20b783d5b87977a4797bd245e31ea037, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -349,7 +350,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0015083253, y: -0.000000834465}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -360,7 +361,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.57466644, y: 0.86727035}
   m_EdgeRadius: 0
 --- !u!114 &4764390174632152190
 MonoBehaviour:
@@ -388,9 +389,11 @@ MonoBehaviour:
   floorEctoOffset: -0.75
   ectoGlideTrail: {fileID: 4017046094776405849, guid: 49556f332eb164f429caee510b0e5566, type: 3}
   isFacingRight: 1
-  slopeRayXOffset: 0.45
-  slopeRayYOffset: -0.5
-  slopeGroundDistance: 0.4
+  slopeRayXOffset: 0.47
+  slopeGroundDistance: 1
+  floatHeight: 0.8
+  camping: 0
+  animator: {fileID: 0}
   rb: {fileID: 6620358792034883293}
   groundCheck: {fileID: 3601806789100972963}
   groundLayer:
@@ -419,7 +422,7 @@ MonoBehaviour:
   xOffset: 1
   strechyYOffset: 1.5
   strechyXOffset: 1.3
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 0.5
   energizingAttackModifier: 0.1
   testEffect: {fileID: 4007503238978434185, guid: a92c91e43905a8f49b463e1d7f7d6551, type: 3}
 --- !u!114 &2834570298843331144
@@ -436,3 +439,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 5469786107766078502, guid: f4ac5bdf54f9c5a4ab3f553bbb6a80a2, type: 3}
   playerUI: {fileID: 0}
+--- !u!95 &7952212023668273072
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015163158133218848}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b47719d70a22cd04b894fea398568e26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
