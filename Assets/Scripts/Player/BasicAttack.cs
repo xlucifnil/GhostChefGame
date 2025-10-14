@@ -34,7 +34,7 @@ public class BasicAttack : MonoBehaviour
             {
 
                 gameObject.GetComponent<PlayerMovement>().animator.SetBool("Attacking", false);
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetButtonDown("Attack"))
                 {
                     Attack();
                 }
