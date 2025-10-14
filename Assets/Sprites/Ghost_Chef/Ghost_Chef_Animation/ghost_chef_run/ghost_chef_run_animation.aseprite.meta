@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -184,13 +185,18 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1090136889
+    uuid:
+      value0: 1122384035
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 1122384035
     name: ghost_chef_run_animation
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: ghost_chef_run_animation_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -199,7 +205,7 @@ ScriptedImporter:
         width: 24
         height: 35
       spriteId: 386a0a8f24a1a584983fac1b65150bae
-    - name: ghost_chef_run_animation_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -208,7 +214,7 @@ ScriptedImporter:
         width: 24
         height: 34
       spriteId: 0aa54e211e3b97e48b74460f8db01ab3
-    - name: ghost_chef_run_animation_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -224,3 +230,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 40, y: 40}
+  previousTextureSize: {x: 64, y: 128}
