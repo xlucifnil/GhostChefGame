@@ -23,13 +23,13 @@ public class PlayerStats : MonoBehaviour
     public Color invulnColor = Color.white;
     public Color refreshingColor = Color.blue;
     Color originalColor = Color.white;
-    GameObject playerUI;
+    public GameObject playerUI;
 
     private void Start()
     {
         refreshingCurrentTime = refreshingSetTime;
         originalColor = gameObject.GetComponent<SpriteRenderer>().color;
-        playerUI = GameObject.Find("PlayerUI");
+        playerUI = Instantiate(playerUI);
         playerUI.GetComponent<PlayerUI>().SnackText.text = numSnacks.ToString();
     }
 

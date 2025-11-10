@@ -38,4 +38,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map/DepressionZone/RDS.unity
     guid: 51d1a6645b590f2469c02e00a5e1aa7c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e3bb04b8199967f48a87d34ba4cf1947, type: 3}

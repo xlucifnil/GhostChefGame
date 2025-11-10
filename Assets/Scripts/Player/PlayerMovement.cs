@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
+    InputAction MoveAction;
+    InputAction JumpAction;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -46,6 +50,17 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         currentSnackTime = snackTime;
         player = GameObject.FindGameObjectWithTag("Player");
+        MoveAction = new InputAction("Move");
+        MoveAction.AddBinding("<Gamepad>/leftStick");
+        MoveAction.AddCompositeBinding("2DVector")
+            .With("Left", "<Keyboard>/a")
+            .With("Right", "<Keyboard>/d");
+        MoveAction.Enable();
+
+        JumpAction = new InputAction("Jump");
+        JumpAction.AddBinding("<Gamepad>/buttonSouth>");
+        JumpAction.AddBinding("<Keyboard>/space");
+        JumpAction.Enable();
     }
 
     // Update is called once per frame
@@ -53,9 +68,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale != 0f && !lockedMovment)
         {
-            horizontal = Input.GetAxisRaw("Horizontal");
+            horizontal = MoveAction.ReadValue<Vector2>().x;
 
-            if (Input.GetButtonDown("Jump"))
+            if (horizontal < 0)
+            {
+                horizontal = -1;
+            }
+            else if (horizontal > 0)
+            {
+                horizontal = 1;
+            }
+
+            if (JumpAction.IsPressed())
             {
                 if (IsGroundedRay())
                 {
@@ -68,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetButton("Jump") && rb.velocity.y <= 0f)
+            if (JumpAction.IsPressed() && rb.velocity.y <= 0f)
             {
                 hovering = true;
                 if(player.GetComponent<PlayerInventory>().GetSide() == RECIPE.LightSide)

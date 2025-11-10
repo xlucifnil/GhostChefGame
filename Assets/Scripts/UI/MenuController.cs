@@ -20,7 +20,7 @@ public class MenuController : MonoBehaviour
     public void MenuToggle()
     {
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Menu"))
         {
             if (GameObject.Find(menu.name) != null)
             {
