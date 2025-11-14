@@ -452,6 +452,46 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
+    - m_Name: 2D Vector
+      m_Id: d448aa2a-9114-491c-b22c-ad8567fd79d6
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 3b804afa-ba33-4239-aede-d56f2feb5a9d
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: c89ce861-0604-4439-9dc8-07ceae24f91c
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: ef6f612a-10d2-48aa-a30a-ddb821e70ef3
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 33d4a0b0-ad06-42c8-921b-12bd051fd066
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
     m_Flags: 0
   JumpAction:
     m_Name: Jump
@@ -615,3 +655,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae199995f87ba4583f805c06199bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVirtualCamera: {fileID: 0}
