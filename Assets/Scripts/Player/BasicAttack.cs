@@ -19,10 +19,12 @@ public class BasicAttack : MonoBehaviour
     GameObject player;
     public GameObject testEffect;
     bool attackLocked;
+    public InputAction AttackAction;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        AttackAction.Enable();
     }
 
     private void Update()
@@ -34,7 +36,7 @@ public class BasicAttack : MonoBehaviour
             {
 
                 gameObject.GetComponent<PlayerMovement>().animator.SetBool("Attacking", false);
-                if (Input.GetButtonDown("Attack"))
+                if (AttackAction.IsPressed())
                 {
                     Attack();
                 }

@@ -156,6 +156,7 @@ MonoBehaviour:
   invulnerable: 0
   invulnColor: {r: 1, g: 1, b: 1, a: 0.50980395}
   refreshingColor: {r: 0, g: 0, b: 1, a: 1}
+  playerUI: {fileID: 3855069464847006924, guid: 5d4935c891cab7145900ecf0de89252d, type: 3}
 --- !u!114 &1949619248523868417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +392,7 @@ MonoBehaviour:
   isFacingRight: 1
   slopeRayXOffset: 0.47
   slopeGroundDistance: 1
-  floatHeight: 0.8
+  floatHeight: 0.85
   camping: 0
   animator: {fileID: 0}
   rb: {fileID: 6620358792034883293}
@@ -402,6 +403,105 @@ MonoBehaviour:
   calledGroundLayer:
     serializedVersion: 2
     m_Bits: 1024
+  MoveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ce9b7ac8-55b7-4255-bb5d-1e0984811f92
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: e4097354-a3e4-40df-880b-84fa81cad57d
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 01dd2c49-6cb2-4235-a1af-467b1a885cfe
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 7fbaf2e6-1992-4322-8db5-515c2c0b11c2
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: d938b621-d78c-447f-8717-114eff66ba71
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: cc435fe3-5e7a-44fb-9a54-035a89d4771a
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  JumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b558f521-f4bc-4628-903d-20bf58edac85
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9a480675-a479-4f93-9381-817ab6e5bb4b
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    - m_Name: 
+      m_Id: be9b1e5a-4e77-4c3d-8312-5271c6f45460
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
+  SnackAction:
+    m_Name: Snack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0203fe89-f35d-4f0c-8b1f-a282f99dee8d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e96098e7-3d96-47de-8469-592887bbe7de
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Snack
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 28b5b119-2e78-4b60-b582-d2b1fdd2e52d
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Snack
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &5603505936226214988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +525,31 @@ MonoBehaviour:
   timeBetweenAttacks: 0.5
   energizingAttackModifier: 0.1
   testEffect: {fileID: 4007503238978434185, guid: a92c91e43905a8f49b463e1d7f7d6551, type: 3}
+  AttackAction:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8509b1eb-6dd2-4bae-832a-653e20f9b565
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fc8a2cee-648f-4337-b3af-7044d77115b6
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 2661800e-a92f-42be-9c59-5a3a3c39d64e
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &2834570298843331144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +564,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 5469786107766078502, guid: f4ac5bdf54f9c5a4ab3f553bbb6a80a2, type: 3}
   playerUI: {fileID: 0}
+  MenuAction:
+    m_Name: Menu
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f9d11e91-87ea-425c-be92-5ab6d3796e3b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 53c4aac7-4e0e-46d6-8136-af3555d26051
+      m_Path: <Gamepad>/start
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Menu
+      m_Flags: 0
+    m_Flags: 0
 --- !u!95 &7952212023668273072
 Animator:
   serializedVersion: 5

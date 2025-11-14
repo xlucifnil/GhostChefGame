@@ -37,29 +37,23 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
-    InputAction MoveAction;
-    InputAction JumpAction;
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask calledGroundLayer;
+
+    public InputAction MoveAction;
+    public InputAction JumpAction;
+    public InputAction SnackAction;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         currentSnackTime = snackTime;
         player = GameObject.FindGameObjectWithTag("Player");
-        MoveAction = new InputAction("Move");
-        MoveAction.AddBinding("<Gamepad>/leftStick");
-        MoveAction.AddCompositeBinding("2DVector")
-            .With("Left", "<Keyboard>/a")
-            .With("Right", "<Keyboard>/d");
         MoveAction.Enable();
 
-        JumpAction = new InputAction("Jump");
-        JumpAction.AddBinding("<Gamepad>/buttonSouth>");
-        JumpAction.AddBinding("<Keyboard>/space");
         JumpAction.Enable();
     }
 
@@ -119,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
                 hovering = false;
             }
 
-            if (Input.GetButtonUp("Jump"))
+            if (!JumpAction.IsPressed())
             {
                 if (rb.velocity.y > 0f)
                 {
@@ -138,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (IsGroundedRay() && Input.GetKeyDown(KeyCode.LeftShift) && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
+            if (IsGroundedRay() && SnackAction.IsPressed() && player.gameObject.GetComponent<PlayerStats>().numSnacks > 0)
             {
                 snacking = true;
             }

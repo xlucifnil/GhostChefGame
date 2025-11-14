@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MenuController : MonoBehaviour
 {
     public GameObject menu;
     public GameObject playerUI;
-    // Update is called once per frame
+    public InputAction MenuAction;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class MenuController : MonoBehaviour
     public void MenuToggle()
     {
         
-        if (Input.GetButtonDown("Menu"))
+        if (MenuAction.IsPressed())
         {
             if (GameObject.Find(menu.name) != null)
             {
